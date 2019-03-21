@@ -19,7 +19,7 @@ lib/
 local.cfg
 Makefile
 parts/
-src/collective.*
+src/kitconcept.*
 src/plone.*
 var/
-src/collective/glossary/browser/static/
+src/kitconcept/glossary/browser/static/
