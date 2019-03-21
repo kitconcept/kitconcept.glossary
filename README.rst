@@ -19,20 +19,20 @@ Mostly Harmless
 .. image:: http://img.shields.io/pypi/v/kitconcept.glossary.svg
     :target: https://pypi.python.org/pypi/kitconcept.glossary
 
-.. image:: https://img.shields.io/travis/collective/kitconcept.glossary/master.svg
-    :target: http://travis-ci.org/collective/kitconcept.glossary
+.. image:: https://img.shields.io/travis/kitconcept/kitconcept.glossary/master.svg
+    :target: http://travis-ci.org/kitconcept/kitconcept.glossary
 
-.. image:: https://img.shields.io/coveralls/collective/kitconcept.glossary/master.svg
-    :target: https://coveralls.io/r/collective/kitconcept.glossary
+.. image:: https://img.shields.io/coveralls/kitconcept/kitconcept.glossary/master.svg
+    :target: https://coveralls.io/r/kitconcept/kitconcept.glossary
 
 Got an idea? Found a bug? Let us know by `opening a support ticket`_.
 
-.. _`opening a support ticket`: https://github.com/collective/kitconcept.glossary/issues
+.. _`opening a support ticket`: https://github.com/kitconcept/kitconcept.glossary/issues
 
 Known issues
 ------------
 
-See the `complete list of bugs on GitHub <https://github.com/collective/kitconcept.glossary/labels/bug>`_.
+See the `complete list of bugs on GitHub <https://github.com/kitconcept/kitconcept.glossary/labels/bug>`_.
 
 Don't Panic
 ===========
@@ -66,21 +66,21 @@ TBD.
 Screenshots
 -----------
 
-.. figure:: https://raw.github.com/collective/kitconcept.glossary/master/docs/glossary.png
+.. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/glossary.png
     :align: center
     :height: 640px
     :width: 768px
 
     Create a Glossary.
 
-.. figure:: https://raw.github.com/collective/kitconcept.glossary/master/docs/usage.png
+.. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/usage.png
     :align: center
     :height: 640px
     :width: 768px
 
     Use it!
 
-.. figure:: https://raw.github.com/collective/kitconcept.glossary/master/docs/controlpanel.png
+.. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/controlpanel.png
     :align: center
     :height: 400px
     :width: 768px
