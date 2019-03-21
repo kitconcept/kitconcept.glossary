@@ -1,0 +1,63 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="kitconcept.glossary">
+
+  <browser:resourceDirectory
+      name="kitconcept.glossary"
+      directory="static"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:page
+      name="glossary-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class="kitconcept.glossary.controlpanel.GlossarySettingsControlPanel"
+      permission="cmf.ManagePortal"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:page
+      name="view"
+      for="kitconcept.glossary.interfaces.IGlossary"
+      class=".views.GlossaryView"
+      template="templates/glossary.pt"
+      permission="zope2.View"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:page
+      name="view"
+      for="kitconcept.glossary.interfaces.ITerm"
+      class=".views.TermView"
+      template="templates/term.pt"
+      permission="zope2.View"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:page
+      name="glossary_state"
+      for="*"
+      class=".views.GlossaryStateView"
+      permission="zope2.View"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:page
+      name="glossary"
+      for="plone.app.layout.navigation.interfaces.INavigationRoot"
+      class=".views.JsonView"
+      permission="zope2.View"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+  <browser:viewlet
+      name="kitconcept.glossary.resources"
+      manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+      class=".views.ResourcesViewlet"
+      template="static/resources.pt"
+      permission="zope2.Public"
+      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
+      />
+
+</configure>

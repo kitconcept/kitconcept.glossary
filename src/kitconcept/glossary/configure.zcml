@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="kitconcept.glossary">
+
+  <five:registerPackage package="." />
+  <i18n:registerTranslations directory="locales" />
+
+  <include package="plone.app.dexterity" />
+
+  <permission
+      id="kitconcept.glossary.AddGlossary"
+      title="kitconcept.glossary: Add Glossary"
+      />
+
+  <permission
+      id="kitconcept.glossary.AddTerm"
+      title="kitconcept.glossary: Add Term"
+      />
+
+  <include package=".browser" />
+
+  <include file="profiles.zcml" />
+  <include file="vocabulary.zcml" />
+
+</configure>

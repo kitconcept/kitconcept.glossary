@@ -11,7 +11,7 @@ long_description = (
 )
 
 setup(
-    name='collective.glossary',
+    name='kitconcept.glossary',
     version=version,
     description=description,
     long_description=long_description,
@@ -32,10 +32,10 @@ setup(
     keywords='plone glossary',
     author='Simples Consultoria',
     author_email='products@simplesconsultoria.com.br',
-    url='https://github.com/collective/collective.glossary',
+    url='https://github.com/kitconcept/kitconcept.glossary',
     packages=find_packages('src'),
     package_dir={'': 'src'},
-    namespace_packages=['collective'],
+    namespace_packages=['kitconcept'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
