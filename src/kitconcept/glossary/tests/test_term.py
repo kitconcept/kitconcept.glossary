@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.interfaces import ITerm
-from collective.glossary.testing import INTEGRATION_TESTING
+from kitconcept.glossary.interfaces import ITerm
+from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone import api
 from plone.dexterity.interfaces import IDexterityFTI
 from zope.component import createObject

@@ -10,5 +10,5 @@ class HiddenProfiles(object):  # pragma: no cover
     def getNonInstallableProfiles():
         """Do not show on Plone's list of installable profiles."""
         return [
-            u'collective.glossary:uninstall',
+            u'kitconcept.glossary:uninstall',
         ]

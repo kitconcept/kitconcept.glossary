@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <rolemap>
   <permissions>
-    <permission name="collective.glossary: Add Glossary" acquire="True">
+    <permission name="kitconcept.glossary: Add Glossary" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>
       <role name="Contributor"/>
     </permission>
-    <permission name="collective.glossary: Add Term" acquire="True">
+    <permission name="kitconcept.glossary: Add Term" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>

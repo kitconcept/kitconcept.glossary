@@ -15,7 +15,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: collective.glossary\n"
+"Domain: kitconcept.glossary\n"
 
 #: ./../interfaces.py:36
 msgid ""
@@ -48,7 +48,7 @@ msgid "Image"
 msgstr ""
 
 #: ./../controlpanel.py:13
-msgid "Settings for the collective.glossary package"
+msgid "Settings for the kitconcept.glossary package"
 msgstr ""
 
 #: ./../profiles/default/types/Term.xml

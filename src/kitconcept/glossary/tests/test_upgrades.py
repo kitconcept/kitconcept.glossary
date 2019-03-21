@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.testing import INTEGRATION_TESTING
-from collective.glossary.testing import IS_PLONE_5
+from kitconcept.glossary.testing import INTEGRATION_TESTING
+from kitconcept.glossary.testing import IS_PLONE_5
 from plone import api
 
 import unittest
@@ -13,7 +13,7 @@ class UpgradeTestCaseBase(unittest.TestCase):
     def setUp(self, from_version, to_version):
         self.portal = self.layer['portal']
         self.setup = self.portal['portal_setup']
-        self.profile_id = u'collective.glossary:default'
+        self.profile_id = u'kitconcept.glossary:default'
         self.from_version = from_version
         self.to_version = to_version
 
@@ -59,12 +59,12 @@ class Upgrade1to2TestCase(UpgradeTestCaseBase):
 
         js_tool = api.portal.get_tool('portal_javascripts')
         JS_IDS = (
-            '++resource++collective.glossary/tooltip.js',
-            '++resource++collective.glossary/jquery.glossarize.js',
-            '++resource++collective.glossary/main.js',
+            '++resource++kitconcept.glossary/tooltip.js',
+            '++resource++kitconcept.glossary/jquery.glossarize.js',
+            '++resource++kitconcept.glossary/main.js',
         )
         css_tool = api.portal.get_tool('portal_css')
-        CSS_IDS = ('++resource++collective.glossary/tooltip.css',)
+        CSS_IDS = ('++resource++kitconcept.glossary/tooltip.css',)
 
         # simulate state on previous version
         for id_ in JS_IDS:

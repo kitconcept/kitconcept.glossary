@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <object name="Glossary" meta_type="Dexterity FTI"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.glossary">
+    i18n:domain="kitconcept.glossary">
 
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Glossary</property>
   <property name="description" i18n:translate="">A Glossary</property>
-  <property name="content_icon">++resource++collective.glossary/img/glossary-icon.png</property>
+  <property name="content_icon">++resource++kitconcept.glossary/img/glossary-icon.png</property>
   <property name="allow_discussion">False</property>
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
@@ -15,13 +15,13 @@
   </property>
 
   <!-- schema interface -->
-  <property name="schema">collective.glossary.interfaces.IGlossary</property>
+  <property name="schema">kitconcept.glossary.interfaces.IGlossary</property>
 
   <!-- class used for content items -->
-  <property name="klass">collective.glossary.content.Glossary</property>
+  <property name="klass">kitconcept.glossary.content.Glossary</property>
 
   <!-- add permission -->
-  <property name="add_permission">collective.glossary.AddGlossary</property>
+  <property name="add_permission">kitconcept.glossary.AddGlossary</property>
 
   <!-- enabled behaviors -->
   <property name="behaviors">

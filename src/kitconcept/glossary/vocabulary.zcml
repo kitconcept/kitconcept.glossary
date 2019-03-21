@@ -3,7 +3,7 @@
   <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
       component=".vocabulary.PortalTypesVocabularyFactory"
-      name="collective.glossary.PortalTypes"
+      name="kitconcept.glossary.PortalTypes"
       />
 
 </configure>

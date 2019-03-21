@@ -28,22 +28,22 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        import collective.glossary
-        self.loadZCML(package=collective.glossary)
+        import kitconcept.glossary
+        self.loadZCML(package=kitconcept.glossary)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'collective.glossary:default')
+        self.applyProfile(portal, 'kitconcept.glossary:default')
 
 
 FIXTURE = Fixture()
 
 INTEGRATION_TESTING = IntegrationTesting(
-    bases=(FIXTURE,), name='collective.glossary:Integration')
+    bases=(FIXTURE,), name='kitconcept.glossary:Integration')
 
 FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(FIXTURE,), name='collective.glossary:Functional')
+    bases=(FIXTURE,), name='kitconcept.glossary:Functional')
 
 ROBOT_TESTING = FunctionalTesting(
     bases=(FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
-    name='collective.glossary:Robot',
+    name='kitconcept.glossary:Robot',
 )

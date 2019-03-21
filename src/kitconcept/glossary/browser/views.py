@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collective.glossary.interfaces import IGlossarySettings
+from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 from plone.i18n.normalizer.base import baseNormalize

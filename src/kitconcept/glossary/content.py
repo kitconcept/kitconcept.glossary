@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.interfaces import IGlossary
-from collective.glossary.interfaces import ITerm
+from kitconcept.glossary.interfaces import IGlossary
+from kitconcept.glossary.interfaces import ITerm
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
 from zope.interface import implementer

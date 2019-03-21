@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.config import PROJECTNAME
-from collective.glossary.logger import logger
+from kitconcept.glossary.config import PROJECTNAME
+from kitconcept.glossary.logger import logger
 
 
 def update_resource_conditions(setup_tool):

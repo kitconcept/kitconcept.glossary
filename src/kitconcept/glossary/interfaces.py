@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary import _
-from collective.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
+from kitconcept.glossary import _
+from kitconcept.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
 from plone.app.textfield import RichText
 from plone.namedfile.field import NamedBlobImage
 from zope import schema
@@ -29,7 +29,7 @@ class IGlossarySettings(Interface):
         default=DEFAULT_ENABLED_CONTENT_TYPES,
         # we are going to list only the main content types in the widget
         value_type=schema.Choice(
-            vocabulary=u'collective.glossary.PortalTypes'),
+            vocabulary=u'kitconcept.glossary.PortalTypes'),
     )
 
 

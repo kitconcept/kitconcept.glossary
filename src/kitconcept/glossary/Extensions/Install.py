@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.config import PROJECTNAME
+from kitconcept.glossary.config import PROJECTNAME
 from plone import api
 
 

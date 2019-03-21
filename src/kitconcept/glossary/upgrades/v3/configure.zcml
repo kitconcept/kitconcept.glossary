@@ -1,22 +1,22 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.glossary">
+    i18n_domain="kitconcept.glossary">
 
   <genericsetup:upgradeSteps
       source="2"
       destination="3"
-      profile="collective.glossary:default">
+      profile="kitconcept.glossary:default">
 
     <genericsetup:upgradeDepends
         title="Fix content type icon location"
-        import_profile="collective.glossary:default"
+        import_profile="kitconcept.glossary:default"
         import_steps="typeinfo"
         />
 
     <genericsetup:upgradeDepends
         title="Fix control panel icon location"
-        import_profile="collective.glossary:default"
+        import_profile="kitconcept.glossary:default"
         import_steps="controlpanel"
         />
 

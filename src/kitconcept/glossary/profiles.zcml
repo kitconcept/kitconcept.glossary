@@ -3,7 +3,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="collective.glossary">
+    i18n_domain="kitconcept.glossary">
 
   <genericsetup:registerProfile
       name="default"
@@ -16,15 +16,15 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="collective.glossary: uninstall"
+      title="kitconcept.glossary: uninstall"
       directory="profiles/uninstall"
-      description="Uninstall collective.glossary."
+      description="Uninstall kitconcept.glossary."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       i18n:attributes="title; description"
       />
 
   <include package=".upgrades" />
 
-  <utility factory=".setuphandlers.HiddenProfiles" name="collective.glossary" />
+  <utility factory=".setuphandlers.HiddenProfiles" name="kitconcept.glossary" />
 
 </configure>

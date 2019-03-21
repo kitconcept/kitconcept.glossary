@@ -9,5 +9,5 @@ This package would not have been possible without the contribution of the follow
 
 You can find an updated list of package contributors on `GitHub`_.
 
-.. _`GitHub`: https://github.com/collective/collective.glossary/contributors
+.. _`GitHub`: https://github.com/collective/kitconcept.glossary/contributors
 .. _`icons`: http://fortawesome.github.io/Font-Awesome/icons/

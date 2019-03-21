@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.testing import IS_PLONE_5
-from collective.glossary.testing import ROBOT_TESTING
+from kitconcept.glossary.testing import IS_PLONE_5
+from kitconcept.glossary.testing import ROBOT_TESTING
 from plone.testing import layered
 
 import os

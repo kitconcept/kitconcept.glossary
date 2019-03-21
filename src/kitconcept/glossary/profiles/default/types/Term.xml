@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <object name="Term" meta_type="Dexterity FTI"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.glossary">
+    i18n:domain="kitconcept.glossary">
 
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Term</property>
   <property name="description" i18n:translate="">A Term</property>
-  <property name="content_icon">++resource++collective.glossary/term-icon.png</property>
+  <property name="content_icon">++resource++kitconcept.glossary/term-icon.png</property>
   <property name="allow_discussion">False</property>
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types" />
 
   <!-- schema interface -->
-  <property name="schema">collective.glossary.interfaces.ITerm</property>
+  <property name="schema">kitconcept.glossary.interfaces.ITerm</property>
 
   <!-- class used for content items -->
-  <property name="klass">collective.glossary.content.Term</property>
+  <property name="klass">kitconcept.glossary.content.Term</property>
 
   <!-- add permission -->
-  <property name="add_permission">collective.glossary.AddTerm</property>
+  <property name="add_permission">kitconcept.glossary.AddTerm</property>
 
   <!-- enabled behaviors -->
   <property name="behaviors">

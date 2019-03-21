@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary import _
-from collective.glossary.interfaces import IGlossarySettings
+from kitconcept.glossary import _
+from kitconcept.glossary.interfaces import IGlossarySettings
 from plone.app.registry.browser import controlpanel
 
 
@@ -10,7 +10,7 @@ class GlossarySettingsEditForm(controlpanel.RegistryEditForm):
 
     schema = IGlossarySettings
     label = _(u'Glossary')
-    description = _(u'Settings for the collective.glossary package')
+    description = _(u'Settings for the kitconcept.glossary package')
 
 
 class GlossarySettingsControlPanel(controlpanel.ControlPanelFormWrapper):

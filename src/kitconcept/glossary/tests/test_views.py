@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.interfaces import IGlossarySettings
-from collective.glossary.testing import INTEGRATION_TESTING
+from kitconcept.glossary.interfaces import IGlossarySettings
+from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone import api
 from zope.publisher.browser import TestRequest
 

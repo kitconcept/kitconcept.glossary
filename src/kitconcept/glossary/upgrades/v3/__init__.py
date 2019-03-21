@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.logger import logger
+from kitconcept.glossary.logger import logger
 from plone import api
 
 
 JS = [
-    '++resource++collective.glossary/tooltip.js',
-    '++resource++collective.glossary/jquery.glossarize.js',
-    '++resource++collective.glossary/main.js',
+    '++resource++kitconcept.glossary/tooltip.js',
+    '++resource++kitconcept.glossary/jquery.glossarize.js',
+    '++resource++kitconcept.glossary/main.js',
 ]
 CSS = [
-    '++resource++collective.glossary/tooltip.css',
-    '++resource++collective.glossary/main.css',
+    '++resource++kitconcept.glossary/tooltip.css',
+    '++resource++kitconcept.glossary/main.css',
 ]
 
 

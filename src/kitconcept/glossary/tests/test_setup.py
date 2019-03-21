@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collective.glossary.config import PROJECTNAME
-from collective.glossary.testing import INTEGRATION_TESTING
+from kitconcept.glossary.config import PROJECTNAME
+from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone.browserlayer.utils import registered_layers
 
 import unittest
@@ -24,14 +24,14 @@ class InstallTestCase(unittest.TestCase):
         self.assertIn('IGlossaryLayer', layers)
 
     def test_add_glossary_permission(self):
-        permission = 'collective.glossary: Add Glossary'
+        permission = 'kitconcept.glossary: Add Glossary'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
         expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
         self.assertListEqual(roles, expected)
 
     def test_add_term_permission(self):
-        permission = 'collective.glossary: Add Term'
+        permission = 'kitconcept.glossary: Add Term'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
         expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']

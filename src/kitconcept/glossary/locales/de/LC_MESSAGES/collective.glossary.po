@@ -41,8 +41,8 @@ msgid "Image"
 msgstr "Bild"
 
 #: ./../controlpanel.py:13
-msgid "Settings for the collective.glossary package"
-msgstr "Einstellungen für die collective.glossary Erweiterung"
+msgid "Settings for the kitconcept.glossary package"
+msgstr "Einstellungen für die kitconcept.glossary Erweiterung"
 
 #: ./../profiles/default/types/Term.xml
 msgid "Term"
