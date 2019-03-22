@@ -83,11 +83,15 @@ def textIndexer(obj):
     try:
         definition = transformer(obj.definition, 'text/plain')
     except AttributeError:
-        definition = ''
+        definition = u''
+    try:
+        variants = u' '.join(obj.variants)
+    except TypeError:
+        variants = u''
 
     return u' '.join((
         safe_unicode(obj.id),
         safe_unicode(obj.title) or u'',
-        safe_unicode(u' '.join(obj.variants)) or u'',
+        safe_unicode(variants),
         safe_unicode(definition),
     ))
