@@ -2,7 +2,6 @@
 from kitconcept.glossary.interfaces import IGlossarySettings
 from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone import api
-from zope.publisher.browser import TestRequest
 
 import unittest
 
@@ -124,31 +123,6 @@ class GlossaryStateViewTestCase(BaseViewTestCase):
 
         self.view.context = self.g1
         self.assertFalse(self.view.content_type_is_enabled)
-
-    def test_is_view_action(self):
-        self.assertTrue(self.view.is_view_action)
-
-        self.view.request = TestRequest(environ={
-            'SERVER_URL': 'http://nohost',
-            'PATH_INFO': '/folder_contents',
-        })
-        self.view.request.base = 'http://nohost/plone'
-        self.assertFalse(self.view.is_view_action)
-
-        self.view.context = self.g1
-        self.view.request = TestRequest(environ={
-            'SERVER_URL': 'http://nohost/plone/g1',
-            'PATH_INFO': '/g1',
-        })
-        self.view.request.base = 'http://nohost/plone'
-        self.assertTrue(self.view.is_view_action)
-
-        self.view.request = TestRequest(environ={
-            'SERVER_URL': 'http://nohost/plone/g1',
-            'PATH_INFO': '/g1/edit',
-        })
-        self.view.request.base = 'http://nohost/plone'
-        self.assertFalse(self.view.is_view_action)
 
 
 class JsonViewTestCase(BaseViewTestCase):
