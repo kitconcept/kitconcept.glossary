@@ -8,19 +8,26 @@
   <body>
     <metal:main fill-slot="main">
 
-      <div tal:define="image nocall:context/image" tal:condition="nocall:image">
-        <img tal:replace="structure context/@@images/image/preview" />
-      </div>
-
       <div tal:replace="structure provider:plone.abovecontenttitle" />
 
       <h1 class="documentFirstHeading"
-          tal:content="context/title">Title</h1>
+          tal:content="context/title">Term</h1>
 
       <div tal:replace="structure provider:plone.belowcontenttitle" />
 
       <div class="documentDescription"
-          tal:content="context/description">Description</div>
+          tal:content="structure context/definition/output|nothing">Definition</div>
+
+      <div class="variants"
+           tal:condition="context/variants">
+        <label for="variants"
+               i18n:translate="">
+          Variants:
+        </label>
+        <ul id="variants">
+          <li tal:repeat="variant context/variants" tal:content="variant">Variant</li>
+        </ul>
+      </div>
     </metal:main>
   </body>
 </html>

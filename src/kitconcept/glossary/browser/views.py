@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
@@ -26,12 +25,10 @@ class TermView(BrowserView):
     def get_entry(self):
         """Get term in the desired format"""
 
-        scales = self.context.unrestrictedTraverse('@@images')
-        image = scales.scale('image', None)
         item = {
-            'title': self.context.title,
-            'description': self.context.description,
-            'image': image,
+            'term': self.context.title,
+            'variants': self.context.variants,
+            'definition': self.context.definition,
         }
         return item
 
