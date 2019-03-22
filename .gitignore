@@ -17,7 +17,6 @@ eggs/
 include/
 lib/
 local.cfg
-Makefile
 parts/
 src/kitconcept.*
 src/plone.*

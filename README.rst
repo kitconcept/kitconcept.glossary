@@ -106,35 +106,23 @@ This simplifies maintainance among multiple Plone versions and avoids bundling o
 Development
 -----------
 
-We use `webpack <https://webpack.js.org/>`_ to process static resources on this package.
-`webpack`_ processes SCSS and JS files, minifies the resulting CSS and JS, and optimizes all images.
+Requirements:
 
-To contribute, you should start the instance in one shell and start webpack watcher on another with the following command:
+- Python 2.7
+- Virtualenv
 
-.. code-block:: console
+Setup::
 
-    $ bin/watch-glossary
+  make
 
-Then go to ``webpack/app`` folder and edit SCSS and JS files;
-`webpack`_ watcher will automatically create the final resources in the right place.
+Run Static Code Analysis::
 
-There are also other commands added to handle more complex scenarios.
+  make code-Analysis
 
-The following command will set the buildout node installation in the system PATH,
-this way you can use `webpack`_ as described on their documentation.
+Run Unit / Integration Tests::
 
-.. code-block:: console
+  make test
 
-    $ bin/env-glossary
+Run Robot Framework based acceptance tests::
 
-The following command generates JS and CSS without the minify step (it can be used to check the code being generated in a human readable way).
-
-.. code-block:: console
-
-    $ bin/debug-glossary
-
-The following command rebuilds static files and exit (insted of keep watching the changes):
-
-.. code-block:: console
-
-    $ bin/build-glossary
+  make test-acceptance
