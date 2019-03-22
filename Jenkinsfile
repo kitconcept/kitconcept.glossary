@@ -11,7 +11,7 @@ pipeline {
     // --- BUILD ---
     stage('Build') {
       parallel {
-        stage('Setup') {
+        stage('Test') {
           agent {
             label "node"
           }
