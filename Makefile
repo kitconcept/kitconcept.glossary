@@ -73,7 +73,7 @@ start:  ## Start backend and frontend
 	tmux \
 		new-session  'make start-backend' \; \
 		split-window -h 'make start-frontend' \; \
-		select-pane -t 1
+		select-pane -t 0
 
 .PHONY: start-backend
 start-backend:  ## Start backend
