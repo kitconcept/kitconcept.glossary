@@ -9,21 +9,17 @@ pipeline {
   stages {
 
     // --- BUILD ---
-    stage('Build') {
-      parallel {
-        stage('Test') {
-          agent {
-            label "node"
-          }
-          steps {
-            deleteDir()
-            checkout scm
-            sh 'make'
-            sh 'make test'
-            sh 'tar cfz stash.tgz bin develop-eggs include lib parts var webpack/node_modules *.cfg requirements.txt'
-            stash includes: 'stash.tgz', name: 'stash.tgz'
-          }
-        }
+    stage('Test') {
+      agent {
+        label "node"
+      }
+      steps {
+        deleteDir()
+        checkout scm
+        sh 'make'
+        sh 'make test'
+        sh 'tar cfz stash.tgz bin develop-eggs include lib parts var webpack/node_modules *.cfg requirements.txt'
+        stash includes: 'stash.tgz', name: 'stash.tgz'
       }
     }
   }
