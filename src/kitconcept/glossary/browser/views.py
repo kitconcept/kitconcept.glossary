@@ -96,7 +96,7 @@ class GlossaryStateView(BrowserView):
     def content_type_is_enabled(self):
         """Check if we must show the tooltip in this context."""
         context = self.context
-        if context.id != context.default_page:
+        if getattr(context, 'default_page', False) and context.id != context.default_page:
             context = context.get(context.default_page)
         portal_type = getattr(context, 'portal_type', None)
         enabled_content_types = api.portal.get_registry_record(

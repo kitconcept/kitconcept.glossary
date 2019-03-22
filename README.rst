@@ -115,6 +115,10 @@ Setup::
 
   make
 
+Run Start backend and frontend::
+
+  make start
+
 Run Static Code Analysis::
 
   make code-Analysis
@@ -122,7 +126,3 @@ Run Static Code Analysis::
 Run Unit / Integration Tests::
 
   make test
-
-Run Robot Framework based acceptance tests::
-
-  make test-acceptance
