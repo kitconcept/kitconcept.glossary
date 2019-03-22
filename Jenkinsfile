@@ -19,46 +19,11 @@ pipeline {
             deleteDir()
             checkout scm
             sh 'make'
+            sh 'make test'
             sh 'tar cfz stash.tgz bin develop-eggs include lib parts var webpack/node_modules *.cfg requirements.txt'
             stash includes: 'stash.tgz', name: 'stash.tgz'
           }
         }
-        // stage('Static Code Analysis') {
-        //   agent {
-        //     label "node"
-        //   }
-        //   steps {
-        //     deleteDir()
-        //     checkout scm
-        //     unstash 'stash.tgz'
-        //     sh 'tar xfz stash.tgz'
-        //     sh 'make code-analysis'
-        //   }
-        // }
-        stage('Unit / Integration Tests') {
-          agent {
-            label "node"
-          }
-          steps {
-            deleteDir()
-            checkout scm
-            unstash 'stash.tgz'
-            sh 'tar xfz stash.tgz'
-            sh 'make test'
-          }
-        }
-        // stage('Robot Framework based acceptance tests') {
-        //   agent {
-        //     label "node"
-        //   }
-        //   steps {
-        //     deleteDir()
-        //     checkout scm
-        //     unstash 'stash.tgz'
-        //     sh 'tar xfz stash.tgz'
-        //     sh 'make test-acceptance'
-        //   }
-        // }
       }
     }
   }
