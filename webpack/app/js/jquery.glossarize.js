@@ -95,7 +95,7 @@
        */
       for(var i =0; i< this.glossary.length; i++){
         if(this.glossary[i].term.match(regex)){
-          return this.glossary[i].description.replace(/\"/gi, '&quot;')
+          return this.glossary[i].definition.replace(/\"/gi, '&quot;')
         }
       }
 
