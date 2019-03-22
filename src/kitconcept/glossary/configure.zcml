@@ -24,6 +24,8 @@
   <include file="profiles.zcml" />
   <include file="vocabulary.zcml" />
 
-  <adapter name="SearchableText" factory=".interfaces.textIndexer" />
+  <adapter name="SearchableText" factory=".indexers.textIndexer" />
+  <adapter name="variants" factory=".indexers.variantsIndexer" />
+  <adapter name="definition" factory=".indexers.definitionIndexer" />
 
 </configure>

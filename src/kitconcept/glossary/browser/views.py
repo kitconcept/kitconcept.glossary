@@ -127,8 +127,13 @@ class JsonView(BrowserView):
         for brain in catalog(portal_type='Term'):
             items.append({
                 'term': brain.Title,
-                'description': brain.Description,
+                'definition': brain.definition,
             })
+            for variant in brain.variants:
+                items.append({
+                    'term': variant,
+                    'definition': brain.definition,
+                })
 
         return items
 
