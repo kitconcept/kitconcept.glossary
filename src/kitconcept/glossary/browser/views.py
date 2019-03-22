@@ -28,7 +28,7 @@ class TermView(BrowserView):
         item = {
             'term': self.context.title,
             'variants': self.context.variants,
-            'definition': self.context.definition,
+            'definition': self.context.definition.raw,
         }
         return item
 
@@ -47,24 +47,29 @@ class GlossaryView(BrowserView):
 
         items = {}
         for brain in catalog(**query):
-            obj = brain.getObject()
-            index = baseNormalize(obj.title)[0].upper()
+            index = baseNormalize(brain.Title)[0].upper()
             if index not in items:
                 items[index] = []
-            scales = obj.unrestrictedTraverse('@@images')
-            image = scales.scale('image', scale='tile')  # 64x64
             item = {
-                'title': obj.title,
-                'description': obj.description,
-                'image': image,
+                'term': brain.Title,
+                'definition': brain.definition,
             }
             items[index].append(item)
+            if brain.variants is None:
+                continue
+            for variant in brain.variants:
+                index = baseNormalize(variant)[0].upper()
+                item = {
+                    'term': variant,
+                    'definition': brain.definition,
+                }
+                items[index].append(item)
 
         language = api.portal.get_current_language()
         collator = zope.ucol.Collator(str(language))
 
         for k in items:
-            items[k] = sorted(items[k], key=lambda term: collator.key(safe_unicode(term['title'])))
+            items[k] = sorted(items[k], key=lambda term: collator.key(safe_unicode(term['term'])))
 
         return items
 
@@ -129,6 +134,8 @@ class JsonView(BrowserView):
                 'term': brain.Title,
                 'definition': brain.definition,
             })
+            if brain.variants is None:
+                continue
             for variant in brain.variants:
                 items.append({
                     'term': variant,
