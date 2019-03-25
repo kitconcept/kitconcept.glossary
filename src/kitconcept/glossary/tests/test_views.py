@@ -2,6 +2,7 @@
 from kitconcept.glossary.interfaces import IGlossarySettings
 from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone import api
+from plone.app.textfield.value import RichTextValue
 
 import unittest
 
@@ -23,11 +24,13 @@ class BaseViewTestCase(unittest.TestCase):
             self.t1 = api.content.create(
                 self.g1, 'Term', 't1',
                 title='First Term',
-                description='First Term Description')
+                definition=RichTextValue(
+                    'First Term Description', 'text/html', 'text/html'))
             self.t2 = api.content.create(
                 self.g1, 'Term', 't2',
                 title='Second Term',
-                description='Second Term Description')
+                definition=RichTextValue(
+                    'Second Term Description', 'text/html', 'text/html'))
             self.d1 = api.content.create(
                 self.portal, 'Document', 'd1',
                 title='Document',
@@ -42,9 +45,9 @@ class TermViewTestCase(BaseViewTestCase):
 
     def test_get_entry(self):
         expected = {
-            'description': 'First Term Description',
-            'image': None,
-            'title': 'First Term',
+            'definition': 'First Term Description',
+            'variants': None,
+            'term': 'First Term',
         }
         self.assertEqual(self.view.get_entry(), expected)
 
@@ -58,14 +61,12 @@ class GlossaryViewTestCase(BaseViewTestCase):
     def test_get_entries(self):
         expected = {
             'F': [{
-                'image': None,
-                'description': 'First Term Description',
-                'title': 'First Term',
+                'definition': 'First Term Description',
+                'term': 'First Term',
             }],
             'S': [{
-                'image': None,
-                'description': 'Second Term Description',
-                'title': 'Second Term',
+                'definition': 'Second Term Description',
+                'term': 'Second Term',
             }],
         }
         self.assertEqual(self.view.get_entries(), expected)
@@ -86,16 +87,14 @@ class GlossaryViewTestCase(BaseViewTestCase):
 
     def test_terms(self):
         expected = [{
-            'image': None,
-            'description': 'First Term Description',
-            'title': 'First Term',
+            'definition': 'First Term Description',
+            'term': 'First Term',
         }]
         self.assertEqual(self.view.terms('F'), expected)
 
         expected = [{
-            'image': None,
-            'description': 'Second Term Description',
-            'title': 'Second Term',
+            'definition': 'Second Term Description',
+            'term': 'Second Term',
         }]
         self.assertEqual(self.view.terms('S'), expected)
 
@@ -134,8 +133,8 @@ class JsonViewTestCase(BaseViewTestCase):
 
     def test_get_json_entries(self):
         expected = [
-            {'description': 'First Term Description', 'term': 'First Term'},
-            {'description': 'Second Term Description', 'term': 'Second Term'},
+            {'definition': 'First Term Description', 'term': 'First Term'},
+            {'definition': 'Second Term Description', 'term': 'Second Term'},
         ]
         self.assertEqual(self.view.get_json_entries(), expected)
 
@@ -145,7 +144,7 @@ class JsonViewTestCase(BaseViewTestCase):
         result = self.view.request.response.getBody()
 
         expected = [
-            {'description': 'First Term Description', 'term': 'First Term'},
-            {'description': 'Second Term Description', 'term': 'Second Term'},
+            {'definition': 'First Term Description', 'term': 'First Term'},
+            {'definition': 'Second Term Description', 'term': 'Second Term'},
         ]
         self.assertEqual(json.loads(result), expected)

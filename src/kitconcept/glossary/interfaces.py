@@ -2,7 +2,7 @@
 from kitconcept.glossary import _
 from kitconcept.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
 from plone.app.textfield import RichText
-from plone.namedfile.field import NamedBlobImage
+from plone.autoform import directives as form
 from zope import schema
 from zope.interface import Interface
 
@@ -39,7 +39,7 @@ class IGlossary(Interface):
 
     text = RichText(
         title=_(u'Body text'),
-        description=_(u''),
+        description=_(u'Enter the body text.'),
         required=False,
     )
 
@@ -48,8 +48,23 @@ class ITerm(Interface):
 
     """A Term."""
 
-    image = NamedBlobImage(
-        title=_(u'Image'),
-        description=_(u''),
+    title = schema.TextLine(
+        title=_(u'Term'),
+        description=_(u'Enter the term to be defined.'),
+        required=True,
+    )
+
+    form.widget('variants', cols=25, rows=10)
+    variants = schema.Tuple(
+        title=_(u'Variants'),
+        description=_(u'Enter the variants of the term, one per line.'),
+        required=False,
+        value_type=schema.TextLine(),
+        missing_value=(),
+    )
+
+    definition = RichText(
+        title=_(u'Body text'),
+        description=_(u'Enter the body text.'),
         required=False,
     )

@@ -71,9 +71,9 @@ code-analysis: ## Run static code analysis
 .PHONY: start
 start:  ## Start backend and frontend
 	tmux \
-		new-session  'make start-backend' \; \
-		split-window -h 'make start-frontend' \; \
-		select-pane -t 0
+		new-session  'make start-backend; read' \; \
+		split-window -h 'make start-frontend; read' \; \
+		select-pane -t 0;
 
 .PHONY: start-backend
 start-backend:  ## Start backend
