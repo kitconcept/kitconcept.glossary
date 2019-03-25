@@ -1,54 +1,115 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="kitconcept.glossary">
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="ploneglossary">
+
+  <tal:comment replace="nothing">
+    ##################
+    Glossary main view
+    ##################
+    $Id$
+  </tal:comment>
+
   <body>
-    <metal:content-core fill-slot="content-core"
-        tal:define="text context/text/output | nothing">
-      <metal:content-core define-macro="content-core">
-        <p tal:define="is_editable context/@@plone_context_state/is_editable"
-           tal:condition="python:not text and is_editable"
-           i18n:domain="plone"
-           i18n:translate="no_body_text"
-           class="discreet">
-            This item does not have any body text, click the edit tab to change it.
-        </p>
+    <metal:main fill-slot="main">
+      <tal:main-macro metal:define-macro="main"
+                      tal:define="kssClassesView context/@@kss_field_decorator_view;
+                                  getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                                  kss_generic_macros here/kss_generic_macros/macros">
+        <div id="glossary"
+             tal:define="uid here/UID;
+                         search_letter request/search_letter | nothing;
+                         search_text request/search_text | nothing;">
 
-        <div tal:condition="text">
-          <div tal:content="structure text">The body</div>
+          <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+          <h1 metal:use-macro="kss_generic_macros/generic_title_view">
+            Title or id
+          </h1>
+
+          <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+          <p metal:use-macro="kss_generic_macros/generic_description_view">
+            Description
+          </p>
+
+          <div tal:replace="structure provider:plone.abovecontentbody" />
+
+          <ul class="glossaryAbcedaire">
+            <li tal:repeat="letter view/first_letters">
+              <a href="#" style="font-weight: bold"
+                 tal:omit-tag="letter/has_no_term"
+                 tal:attributes="href letter/zoom_link;
+                                 class letter/css_class"
+                 tal:content="letter/glyph" />
+            </li>
+          </ul>
+
+          <fieldset>
+            <p></p>
+            <form name="glossary_search"
+                  action="search"
+                  tal:attributes="action context/absolute_url" >
+              <label for="search_text"
+                     class="hiddenStructure"
+                     i18n:translate="label_text_search">
+                Search
+              </label>
+              <input id="search_text"
+                     name="search_text"
+                     type="text"
+                     size="20"
+                     value=""
+                     alt="Search"
+                     title="Search"
+                     i18n:attributes="alt; title"
+                     tal:attributes="value view/search_text;
+                                     tabindex tabindex/next|nothing" />
+
+              <input class="searchButton"
+                     type="submit"
+                     value="Search"
+                     i18n:attributes="value"
+                     tal:attributes="tabindex tabindex/next|nothing" />
+            </form>
+          </fieldset>
+
+          <tal:comment replace="nothing">
+            #######################
+            Looping on term display
+            #######################
+          </tal:comment>
+
+          <tal:if-results define="batch view/batch_results"
+                          condition="view/has_results">
+            <div metal:use-macro="here/batch_macros/macros/navigation" />
+            <dl tal:define="result_features nocall:view/result_features">
+              <tal:loop repeat="result batch">
+                <tal:entry define="result python:result_features(result);
+                                   url result/url">
+                  <dt>
+                    <a href="#"
+                       tal:attributes="href url">
+                      <img tal:attributes="src string:${context/portal_url}/++resource++kitconcept.glossary/img/ploneglossarydefinition_icon.png"
+                           height="16"
+                           width="16"
+                           alt=""
+                           /></a>&nbsp;<a href="#"
+                                          tal:attributes="href url"
+                                          tal:content="result/title" />
+                  </dt>
+
+                  <dd tal:content="structure result/description" />
+
+                </tal:entry>
+
+              </tal:loop>
+            </dl>
+
+          </tal:if-results>
         </div>
-
-        <tal:repeat repeat="letter view/letters">
-          <div class="letter">
-            <div class="header">
-              <div class="title" tal:content="letter"></div>
-            </div>
-            <div class="terms">
-              <tal:repeat repeat="item python:view.terms(letter)">
-                <div class="term">
-                  <img tal:define="image item/image"
-                      tal:condition="nocall:image"
-                      tal:replace="structure image/tag" />
-                  <div class="description-wrapper">
-                    <div class="description">
-                      <span class="title"
-                            tal:content="item/title">
-                      </span>
-                      -
-                      <span class="description"
-                            tal:content="item/description">
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </tal:repeat>
-            </div>
-          </div>
-        </tal:repeat>
-      </metal:content-core>
-    </metal:content-core>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+      </tal:main-macro>
+    </metal:main>
   </body>
 </html>

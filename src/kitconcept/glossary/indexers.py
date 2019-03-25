@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from kitconcept.glossary.interfaces import ITerm
 from plone.app.textfield.interfaces import ITransformer
+from plone.i18n.normalizer.base import baseNormalize
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
 
@@ -37,3 +38,10 @@ def variantsIndexer(context):
 @indexer(ITerm)
 def definitionIndexer(context):
     return context.definition.raw
+
+
+@indexer(ITerm)
+def letterIndexer(context):
+    if not context.title:
+        return u''
+    return baseNormalize(context.title)[0].upper()

@@ -19,6 +19,7 @@ module.exports = makeConfig(
     config.entry.unshift(
       './app/img/glossary-icon.png',
       './app/img/term-icon.png',
+      './app/img/ploneglossarydefinition_icon.png',
     );
   },
 );
