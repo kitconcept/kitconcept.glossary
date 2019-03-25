@@ -15,8 +15,7 @@
       <tal:main-macro metal:define-macro="main"
                       tal:define="kssClassesView context/@@kss_field_decorator_view;
                                   getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                                  kss_generic_macros here/kss_generic_macros/macros;
-                                  view here/@@glossary_main_page">
+                                  kss_generic_macros here/kss_generic_macros/macros">
         <div id="glossary"
              tal:define="gtool nocall:here/portal_glossary;
                          uid here/UID;

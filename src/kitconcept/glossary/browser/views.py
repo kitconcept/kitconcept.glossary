@@ -2,13 +2,19 @@
 from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
-from plone.i18n.normalizer.base import baseNormalize
 from plone.memoize import ram
-from Products.CMFPlone.utils import safe_unicode
+from plone.memoize.instance import memoize
+from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
+from Products.PloneGlossary.utils import encode_ascii
+from zExceptions import Redirect
 
 import json
-import zope.ucol
+import string
+
+
+BATCH_SIZE = 30
+PLONEGLOSSARY_TOOL = 'portal_glossary'
 
 
 def _catalog_counter_cachekey(method, self):
@@ -37,49 +43,83 @@ class GlossaryView(BrowserView):
 
     """Default view of Glossary type"""
 
-    @ram.cache(_catalog_counter_cachekey)
-    def get_entries(self):
-        """Get glossary entries and keep them in the desired format"""
+    def __init__(self, context, request):
+        super(GlossaryView, self).__init__(context, request)
+        self.search_letter = request.get('search_letter', '')
+        self.search_text = request.get('search_text')
+        self.batch_start = request.get('b_start', 0)
+        self.uid = context.UID()
+        # self.gtool = get Tool By Name(context, PLONEGLOSSARY_TOOL)
 
-        catalog = api.portal.get_tool('portal_catalog')
-        path = '/'.join(self.context.getPhysicalPath())
-        query = dict(portal_type='Term', path={'query': path, 'depth': 1})
+    def title(self):
+        """Title of our glossary"""
 
-        items = {}
-        for brain in catalog(**query):
-            index = baseNormalize(brain.Title)[0].upper()
-            if index not in items:
-                items[index] = []
-            item = {
-                'term': brain.Title,
-                'definition': brain.definition,
+        return self.context.title_or_id()
+
+    def first_letters(self):
+        """Users with non latin chars (cyrillic, arabic, ...) should override
+        this with a better suited dataset."""
+
+        out = []
+        existing = self.gtool.getAbcedaire([self.uid])
+        glossary_url = self.context.absolute_url()
+        for letter in tuple(string.ascii_uppercase):
+            letter_map = {
+                'glyph': letter,
+                'has_no_term': letter.lower() not in existing,
+                'zoom_link': glossary_url + '?search_letter=' + letter.lower(),
+                'css_class': (letter.lower() == self.search_letter.lower() and
+                              'selected' or None),
             }
-            items[index].append(item)
-            if brain.variants is None:
-                continue
-            for variant in brain.variants:
-                index = baseNormalize(variant)[0].upper()
-                item = {
-                    'term': variant,
-                    'definition': brain.definition,
-                }
-                items[index].append(item)
+            out.append(letter_map)
+        return out
 
-        language = api.portal.get_current_language()
-        collator = zope.ucol.Collator(str(language))
+    def has_results(self):
+        """Something to show ?"""
 
-        for k in items:
-            items[k] = sorted(items[k], key=lambda term: collator.key(safe_unicode(term['term'])))
+        return len(self._list_results()) > 0
 
-        return items
+    def batch_results(self):
+        """Wrap all results in a batch"""
 
-    def letters(self):
-        """Return all letters sorted"""
-        return sorted(self.get_entries())
+        results = self._list_results()
+        batch = Batch(results, BATCH_SIZE, int(self.batch_start), orphan=1)
+        return batch
 
-    def terms(self, letter):
-        """Return all terms of one letter"""
-        return self.get_entries()[letter]
+    @memoize
+    def _list_results(self):
+        """Terms list (brains) depending on the request"""
+
+        gtool = self.gtool
+        if self.search_letter:
+            # User clicked a letter
+            results = gtool.getAbcedaireBrains([self.uid],
+                                               letters=[self.search_letter])
+        elif self.search_text:
+            # User searches for text
+            # results = gtool.search Results([self.uid],
+            #                              SearchableText=self.search_text)
+            # We redirect to the result if unique
+            if len(results) == 1:
+                target = results[0].getURL()
+                raise Redirect(target)
+        # else:
+        #     # Viewing all terms
+        #     results = gtool.search Results([self.uid])
+        results = list(results)
+        results.sort(lambda x, y: cmp(encode_ascii(x.Title),
+                                      encode_ascii(y.Title)))
+        return tuple(results)
+
+    def result_features(self, result):
+        """TAL friendly properties of each feature"""
+
+        description = self.gtool.truncateDescription(result.Description)
+        return {
+            'url': result.getURL(),
+            'title': result.Title or result.getId,
+            'description': description.replace('\n', '<br />'),
+        }
 
 
 class GlossaryStateView(BrowserView):
