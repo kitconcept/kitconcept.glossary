@@ -104,7 +104,7 @@ class GlossaryView(BrowserView):
         }
 
         if self.search_letter:
-            results = api.content.find(letter=self.search_letter, **common)
+            results = api.content.find(letter=self.search_letter.upper(), **common)
         elif self.search_text:
             results = api.content.find(SearchableText=self.search_text, **common)
             # We redirect to the result if unique
