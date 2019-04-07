@@ -2,4 +2,5 @@
 <object name="portal_catalog">
     <column value="variants"/>
     <column value="definition"/>
+    <column value="letter"/>
 </object>
