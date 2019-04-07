@@ -138,7 +138,7 @@ class GlossaryView(BrowserView):
     def result_features(self, result):
         """TAL friendly properties of each feature"""
 
-        description = self.truncateDescription(result.Description)
+        description = self.truncateDescription(result.definition)
         return {
             'url': result.getURL(),
             'title': result.Title or result.getId,
