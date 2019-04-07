@@ -42,4 +42,6 @@ def definitionIndexer(context):
 
 @indexer(ITerm)
 def letterIndexer(context):
+    if not context.title:
+        return u''
     return baseNormalize(context.title)[0].upper()
