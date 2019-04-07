@@ -2,11 +2,12 @@
 from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
+from plone.i18n.normalizer.base import baseNormalize
 from plone.memoize import ram
 from plone.memoize.instance import memoize
 from Products.CMFPlone.PloneBatch import Batch
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
-from Products.PloneGlossary.utils import encode_ascii
 from zExceptions import Redirect
 
 import json
@@ -14,7 +15,7 @@ import string
 
 
 BATCH_SIZE = 30
-PLONEGLOSSARY_TOOL = 'portal_glossary'
+DESCRIPTION_LENGTH = 0
 
 
 def _catalog_counter_cachekey(method, self):
@@ -49,7 +50,6 @@ class GlossaryView(BrowserView):
         self.search_text = request.get('search_text')
         self.batch_start = request.get('b_start', 0)
         self.uid = context.UID()
-        # self.gtool = get Tool By Name(context, PLONEGLOSSARY_TOOL)
 
     def title(self):
         """Title of our glossary"""
@@ -59,14 +59,22 @@ class GlossaryView(BrowserView):
     def first_letters(self):
         """Users with non latin chars (cyrillic, arabic, ...) should override
         this with a better suited dataset."""
-
         out = []
-        existing = self.gtool.getAbcedaire([self.uid])
         glossary_url = self.context.absolute_url()
         for letter in tuple(string.ascii_uppercase):
+            exists = any([
+                brain.letter
+                for brain in api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='Term',
+                    letter=letter,
+                    sort_limit=1,
+                )
+            ])
             letter_map = {
                 'glyph': letter,
-                'has_no_term': letter.lower() not in existing,
+                'has_no_term': not exists,
                 'zoom_link': glossary_url + '?search_letter=' + letter.lower(),
                 'css_class': (letter.lower() == self.search_letter.lower() and
                               'selected' or None),
@@ -89,32 +97,48 @@ class GlossaryView(BrowserView):
     @memoize
     def _list_results(self):
         """Terms list (brains) depending on the request"""
+        common = {
+            'context': self.context,
+            'depth': 1,
+            'portal_type': 'Term',
+        }
 
-        gtool = self.gtool
         if self.search_letter:
-            # User clicked a letter
-            results = gtool.getAbcedaireBrains([self.uid],
-                                               letters=[self.search_letter])
+            results = api.content.find(letter=self.search_letter, **common)
         elif self.search_text:
-            # User searches for text
-            # results = gtool.search Results([self.uid],
-            #                              SearchableText=self.search_text)
+            results = api.content.find(SearchableText=self.search_text, **common)
             # We redirect to the result if unique
             if len(results) == 1:
                 target = results[0].getURL()
                 raise Redirect(target)
-        # else:
-        #     # Viewing all terms
-        #     results = gtool.search Results([self.uid])
+        else:
+            # Viewing all terms
+            results = api.content.find(**common)
         results = list(results)
-        results.sort(lambda x, y: cmp(encode_ascii(x.Title),
-                                      encode_ascii(y.Title)))
+        results.sort(lambda x, y: cmp(baseNormalize(x.Title),
+                                      baseNormalize(y.Title)))
         return tuple(results)
+
+    def truncateDescription(self, text):
+        """Truncate definition using tool properties"""
+
+        max_length = DESCRIPTION_LENGTH
+        text = safe_unicode(text).strip()
+
+        if max_length > 0 and len(text) > max_length:
+            ellipsis = self.description_ellipsis
+            text = text[:max_length]
+            text = text.strip()
+            text = '{0} {1}'.format(text, ellipsis)
+
+        text = text.encode('utf-8', 'replace')
+
+        return text
 
     def result_features(self, result):
         """TAL friendly properties of each feature"""
 
-        description = self.gtool.truncateDescription(result.Description)
+        description = self.truncateDescription(result.Description)
         return {
             'url': result.getURL(),
             'title': result.Title or result.getId,

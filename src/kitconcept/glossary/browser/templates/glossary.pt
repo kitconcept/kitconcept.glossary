@@ -17,8 +17,7 @@
                                   getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                                   kss_generic_macros here/kss_generic_macros/macros">
         <div id="glossary"
-             tal:define="gtool nocall:here/portal_glossary;
-                         uid here/UID;
+             tal:define="uid here/UID;
                          search_letter request/search_letter | nothing;
                          search_text request/search_text | nothing;">
 
@@ -84,19 +83,17 @@
           <tal:if-results define="batch view/batch_results"
                           condition="view/has_results">
             <div metal:use-macro="here/batch_macros/macros/navigation" />
-            <dl tal:define="result_features nocall:view/result_features;
-                            definition_icon here/ploneglossarydefinition_icon.gif">
+            <dl tal:define="result_features nocall:view/result_features">
               <tal:loop repeat="result batch">
                 <tal:entry define="result python:result_features(result);
                                    url result/url">
                   <dt>
                     <a href="#"
                        tal:attributes="href url">
-                      <img src="#"
+                      <img tal:attributes="src string:${context/portal_url}/++resource++kitconcept.glossary/img/ploneglossarydefinition_icon.png"
                            height="16"
                            width="16"
                            alt=""
-                           tal:replace="structure definition_icon"
                            /></a>&nbsp;<a href="#"
                                           tal:attributes="href url"
                                           tal:content="result/title" />
