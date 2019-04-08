@@ -4,6 +4,9 @@ Changelog
 1.1b1 (unreleased)
 ------------------
 
+- Use a Transform to inject Glossary data into HTML in the backend instead of by javascript.
+  [rodfersou]
+
 - Mimic content type and default view from Products.PloneGlossary.
   [rodfersou]
 
