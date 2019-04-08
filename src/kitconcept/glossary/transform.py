@@ -19,7 +19,9 @@ TEXT_SELECTOR = '{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1
 
 GLOSSARY_TAG = """
 <spam class="highlightedGlossaryTerm"
-      data-definition="{1}">
+   data-term="{0}"
+   data-definition="{1}"
+   data-url="{2}">
     {0}
 </spam>
 """
@@ -47,12 +49,12 @@ class GlossaryTransform(object):
         except (AttributeError, TypeError, etree.ParseError):
             return
 
-    def _apply_glossary(self, element, term, definition):
+    def _apply_glossary(self, element, term, definition, url):
         """Inject attributes needed by lazysizes to lazy load elements.
         For more information, see: https://afarkas.github.io/lazysizes
         """
         html = etree.tostring(element)
-        new_html = html.replace(term, GLOSSARY_TAG.format(term, escape(definition)))
+        new_html = html.replace(term, GLOSSARY_TAG.format(term, escape(definition), url))
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)
@@ -95,10 +97,10 @@ class GlossaryTransform(object):
         for brain in api.content.find(portal_type='Term'):
             path = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title)
             for el in result.tree.xpath(path):
-                self._apply_glossary(el, brain.Title, brain.definition)
+                self._apply_glossary(el, brain.Title, brain.definition, brain.getURL())
             for variant in brain.variants:
                 path = TEXT_SELECTOR.format(ROOT_SELECTOR, variant)
                 for el in result.tree.xpath(path):
-                    self._apply_glossary(el, variant, brain.definition)
+                    self._apply_glossary(el, variant, brain.definition, brain.getURL())
 
         return result
