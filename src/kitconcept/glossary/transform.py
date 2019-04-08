@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from cgi import escape
 from kitconcept.glossary.interfaces import IGlossarySettings
 from kitconcept.glossary.logger import logger
 from lxml import etree
@@ -15,6 +16,13 @@ ROOT_SELECTOR = '//*[@id="content"]'
 
 # search for element text
 TEXT_SELECTOR = '{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
+
+GLOSSARY_TAG = """
+<spam class="highlightedGlossaryTerm"
+      data-definition="{1}">
+    {0}
+</spam>
+"""
 
 
 @implementer(ITransform)
@@ -44,7 +52,7 @@ class GlossaryTransform(object):
         For more information, see: https://afarkas.github.io/lazysizes
         """
         html = etree.tostring(element)
-        new_html = html.replace(term, '<spam class="glossary">{0}</spam>'.format(term))
+        new_html = html.replace(term, GLOSSARY_TAG.format(term, escape(definition)))
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)

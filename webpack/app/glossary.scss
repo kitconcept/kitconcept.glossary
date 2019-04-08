@@ -20,3 +20,9 @@
     display: inline-block;
     width: auto;
 }
+.highlightedGlossaryTerm {
+  border-bottom: 2px dotted #000;
+  background: #eef3f5;
+  cursor: help;
+  z-index: 2;
+}
