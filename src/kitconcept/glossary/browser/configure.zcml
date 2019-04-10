@@ -35,22 +35,6 @@
       layer="kitconcept.glossary.interfaces.IGlossaryLayer"
       />
 
-  <browser:page
-      name="glossary_state"
-      for="*"
-      class=".views.GlossaryStateView"
-      permission="zope2.View"
-      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
-      />
-
-  <browser:page
-      name="glossary"
-      for="plone.app.layout.navigation.interfaces.INavigationRoot"
-      class=".views.JsonView"
-      permission="zope2.View"
-      layer="kitconcept.glossary.interfaces.IGlossaryLayer"
-      />
-
   <browser:viewlet
       name="kitconcept.glossary.resources"
       manager="plone.app.layout.viewlets.interfaces.IPortalTop"

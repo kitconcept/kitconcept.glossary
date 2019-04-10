@@ -138,81 +138,12 @@ class GlossaryView(BrowserView):
     def result_features(self, result):
         """TAL friendly properties of each feature"""
 
-        description = self.truncateDescription(result.definition)
+        description = self.truncateDescription(result.Description)
         return {
             'url': result.getURL(),
             'title': result.Title or result.getId,
             'description': description.replace('\n', '<br />'),
         }
-
-
-class GlossaryStateView(BrowserView):
-    """Glossary State view used to enable or disable resources
-
-    This is called by JS and CSS resources registry
-    """
-
-    @property
-    def tooltip_is_enabled(self):
-        """Check if term tooltip is enabled."""
-        return api.portal.get_registry_record(
-            IGlossarySettings.__identifier__ + '.enable_tooltip')
-
-    @property
-    def content_type_is_enabled(self):
-        """Check if we must show the tooltip in this context."""
-        context = self.context
-        if getattr(context, 'default_page', False) and context.id != context.default_page:
-            context = context.get(context.default_page)
-        portal_type = getattr(context, 'portal_type', None)
-        enabled_content_types = api.portal.get_registry_record(
-            IGlossarySettings.__identifier__ + '.enabled_content_types')
-        return portal_type in enabled_content_types
-
-    def __call__(self):
-        response = self.request.response
-        response.setHeader('content-type', 'application/json')
-
-        data = {
-            'enabled': self.tooltip_is_enabled and self.content_type_is_enabled,
-        }
-        return response.setBody(json.dumps(data))
-
-
-class JsonView(BrowserView):
-    """Json view that return all glossary items in json format
-
-    This view is used into an ajax call for
-    """
-
-    @ram.cache(_catalog_counter_cachekey)
-    def get_json_entries(self):
-        """Get all itens and prepare in the desired format.
-        Note: do not name it get_entries, otherwise caching is broken. """
-
-        catalog = api.portal.get_tool('portal_catalog')
-
-        items = []
-        for brain in catalog(portal_type='Term'):
-            items.append({
-                'term': brain.Title,
-                'definition': brain.definition,
-            })
-            if brain.variants is None:
-                continue
-            for variant in brain.variants:
-                items.append({
-                    'term': variant,
-                    'definition': brain.definition,
-                })
-
-        return items
-
-    def __call__(self):
-        response = self.request.response
-        response.setHeader('content-type', 'application/json')
-
-        return response.setBody(json.dumps(self.get_json_entries()))
 
 
 class ResourcesViewlet(ViewletBase):
