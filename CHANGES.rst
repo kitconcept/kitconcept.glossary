@@ -4,6 +4,12 @@ Changelog
 1.1b1 (unreleased)
 ------------------
 
+- Use a Transform to inject Glossary data into HTML in the backend instead of by javascript.
+  [rodfersou]
+
+- Mimic content type and default view from Products.PloneGlossary.
+  [rodfersou]
+
 - Deprecate resource registries; instead, we now use a viewlet in plone.htmlhead to load JavaScript code.
   This simplifies maintainance of the add-on among multiple Plone versions.
   [daggelpop]

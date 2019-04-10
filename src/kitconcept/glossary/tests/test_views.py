@@ -58,46 +58,6 @@ class GlossaryViewTestCase(BaseViewTestCase):
         super(GlossaryViewTestCase, self).setUp()
         self.view = api.content.get_view(u'view', self.g1, self.request)
 
-    def test_get_entries(self):
-        expected = {
-            'F': [{
-                'definition': 'First Term Description',
-                'term': 'First Term',
-            }],
-            'S': [{
-                'definition': 'Second Term Description',
-                'term': 'Second Term',
-            }],
-        }
-        self.assertEqual(self.view.get_entries(), expected)
-
-    def test_letters(self):
-        self.assertEqual(self.view.letters(), [u'F', u'S'])
-
-        with api.env.adopt_roles(['Manager']):
-            self.ta1 = api.content.create(
-                self.g1, 'Term', 'ta1',
-                title='American',
-                description='American Term Description')
-            self.ta2 = api.content.create(
-                self.g1, 'Term', 'ta2',
-                title='Ásia',
-                description='Ásia Term Description')
-        self.assertEqual(self.view.letters(), [u'A', u'F', u'S'])
-
-    def test_terms(self):
-        expected = [{
-            'definition': 'First Term Description',
-            'term': 'First Term',
-        }]
-        self.assertEqual(self.view.terms('F'), expected)
-
-        expected = [{
-            'definition': 'Second Term Description',
-            'term': 'Second Term',
-        }]
-        self.assertEqual(self.view.terms('S'), expected)
-
 
 class GlossaryStateViewTestCase(BaseViewTestCase):
 

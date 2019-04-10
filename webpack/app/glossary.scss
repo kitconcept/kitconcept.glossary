@@ -1,1 +1,28 @@
-@import 'scss/tooltip.css';
+@import 'scss/glossarytip';
+
+.glossaryAbcedaire,
+#content ul.glossaryAbcedaire {
+    list-style: none;
+    margin: 0;
+    margin-bottom: 1em;
+    li {
+        display: inline;
+        margin: 0;
+        margin-right: 0.5em;
+    }
+    .selected {
+        font-weight: bold;
+        font-size: 150%;
+        text-decoration: none;
+    }
+}
+#glossary_search #search_text {
+    display: inline-block;
+    width: auto;
+}
+.highlightedGlossaryTerm {
+  border-bottom: 2px dotted #000;
+  background: #eef3f5;
+  cursor: help;
+  z-index: 2;
+}

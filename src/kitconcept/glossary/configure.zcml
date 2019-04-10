@@ -27,5 +27,12 @@
   <adapter name="SearchableText" factory=".indexers.textIndexer" />
   <adapter name="variants" factory=".indexers.variantsIndexer" />
   <adapter name="definition" factory=".indexers.definitionIndexer" />
+  <adapter name="letter" factory=".indexers.letterIndexer" />
+
+  <adapter
+      for="* .interfaces.IGlossaryLayer"
+      name="kitconcept.glossary"
+      factory=".transform.GlossaryTransform"
+      />
 
 </configure>

@@ -1,0 +1,21 @@
+@import url(~tippy.js/dist/themes/light.css);
+
+
+/* tip preview */
+.glossary-definition-popup {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  .glossary-term {
+    font-weight: bold;
+
+    width: 12rem;
+    margin: 1rem;
+  }
+  .glossary-definition {
+    margin: 0 1rem;
+  }
+}
