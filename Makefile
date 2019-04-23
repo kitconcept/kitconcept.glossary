@@ -75,6 +75,10 @@ bin/python bin/pip:
 test:  ## Test
 	bin/test
 
+.PHONY: Test Performance
+test-performance:
+	jmeter -n -t performance.jmx -l jmeter.jtl
+
 .PHONY: Code Analysis
 code-analysis:  ## Code Analysis
 	bin/code-analysis
