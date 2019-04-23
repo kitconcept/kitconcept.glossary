@@ -1,3 +1,5 @@
+.Python
+.vscode
 *.egg-info
 *.mo
 *.pyc
