@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 from plone.i18n.normalizer.base import baseNormalize
-from plone.memoize import ram
 from plone.memoize.instance import memoize
 from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from zExceptions import Redirect
 
-import json
 import string
 
 
