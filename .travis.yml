@@ -33,7 +33,7 @@ before_install:
   - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
   - pip install cookiecutter
   - export DISPLAY=:99.0
-  - sudo sh -e /etc/init.d/xvfb start
+  # - sh -e /etc/init.d/xvfb start
   # - wget "http://chromedriver.storage.googleapis.com/2.44/chromedriver_linux64.zip"
   # - unzip chromedriver_linux64.zip
   # - sudo mv chromedriver /usr/local/bin
