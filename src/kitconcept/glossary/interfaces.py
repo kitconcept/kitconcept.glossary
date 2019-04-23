@@ -24,7 +24,8 @@ class IGlossarySettings(Interface):
 
     enabled_content_types = schema.List(
         title=_(u'Enabled Content Types'),
-        description=_(u'Only objects of these content types will display glossary terms.'),
+        description=_(
+            u'Only objects of these content types will display glossary terms.'),
         required=False,
         default=DEFAULT_ENABLED_CONTENT_TYPES,
         # we are going to list only the main content types in the widget

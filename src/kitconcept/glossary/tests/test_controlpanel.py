@@ -65,7 +65,8 @@ class RegistryTestCase(unittest.TestCase):
     def test_enabled_content_types_record_in_registry(self):
         from kitconcept.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
         self.assertTrue(hasattr(self.settings, 'enabled_content_types'))
-        self.assertEqual(self.settings.enabled_content_types, DEFAULT_ENABLED_CONTENT_TYPES)
+        self.assertEqual(
+            self.settings.enabled_content_types, DEFAULT_ENABLED_CONTENT_TYPES)
 
     def test_records_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']
