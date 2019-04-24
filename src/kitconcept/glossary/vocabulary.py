@@ -13,4 +13,5 @@ class PortalTypesVocabulary(ReallyUserFriendlyTypesVocabulary):
         items = [i for i in items if i.token not in ('Glossary', 'Term')]
         return SimpleVocabulary(items)
 
+
 PortalTypesVocabularyFactory = PortalTypesVocabulary()

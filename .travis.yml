@@ -7,8 +7,11 @@ sudo: required
 cache:
   pip: true
   directories:
+    - eggs
+    - parts/node
     - $HOME/buildout-cache
-
+addons:
+  firefox: 45.8.0esr
 matrix:
   include:
     - python: "2.7"
@@ -24,7 +27,13 @@ matrix:
   exclude:
     - python: "2.7"
     - python: "3.7"
-
+  allow_failures:
+    - python: "2.7"
+      env: PLONE_VERSION=5.0.x
+    - python: "2.7"
+      env: PLONE_VERSION=5.2.x
+    - python: "3.7"
+      env: PLONE_VERSION=5.2.x
 before_install:
   - mkdir -p $HOME/buildout-cache/{eggs,downloads}
   - mkdir $HOME/.buildout
@@ -33,14 +42,15 @@ before_install:
   - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
   - pip install cookiecutter
   - export DISPLAY=:99.0
-  # - sh -e /etc/init.d/xvfb start
-  # - wget "http://chromedriver.storage.googleapis.com/2.44/chromedriver_linux64.zip"
-  # - unzip chromedriver_linux64.zip
-  # - sudo mv chromedriver /usr/local/bin
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - pip install -r requirements.txt
+  # FIXME: I have no idea how and why six==1.11.0 is being installed
+  - pip uninstall -y six
 install:
   - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
   - buildout -t 10 -c travis.cfg
+before_script:
+  - firefox -v
 script:
   - make code-analysis
   - make test

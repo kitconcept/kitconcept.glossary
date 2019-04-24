@@ -54,7 +54,8 @@ class GlossaryTransform(object):
         For more information, see: https://afarkas.github.io/lazysizes
         """
         html = etree.tostring(element)
-        new_html = html.replace(term, GLOSSARY_TAG.format(term, escape(definition), url))
+        new_html = html.replace(
+            term, GLOSSARY_TAG.format(term, escape(definition), url))
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)

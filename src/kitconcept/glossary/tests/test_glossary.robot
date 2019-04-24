@@ -9,8 +9,8 @@ Suite Teardown  Close all browsers
 
 *** Variables ***
 
-${title_selector} =  input#form-widgets-IBasic-title
-${description_selector} =  textarea#form-widgets-IBasic-description
+${glossary_title_selector} =  input#form-widgets-IBasic-title
+${term_title_selector} =  input#form-widgets-title
 
 *** Test cases ***
 
@@ -42,7 +42,7 @@ Create Glossary
     [arguments]  ${title}
 
     Click Add Glossary
-    Input Text  css=${title_selector}  ${title}
+    Input Text  css=${glossary_title_selector}  ${title}
     Click Button  Save
     Page Should Contain  Item created
 
@@ -51,7 +51,7 @@ Create Term
 
     Click Link  ${glossary}
     Click Add Term
-    Input Text  css=${title_selector}  ${title}
+    Input Text  css=${term_title_selector}  ${title}
     Click Button  Save
     Page Should Contain  Item created
 
