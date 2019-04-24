@@ -24,32 +24,43 @@ kitconcept.glossary
 Introduction
 ------------
 
-A Dexterity-based content type to define a glossary and its terms.
+kitconcept.glossary is a Plone add-on product to define a glossary.
 
 This package is inspired by `PloneGlossary`_.
 
 .. _`PloneGlossary`: https://pypi.python.org/pypi/Products.PloneGlossary
+
+Features
+--------
+
+- As editor, I can add a glossary
+- As editor, I can add a glossary item to a glossary
+- As user, I can see a glossary term definition
+- As administrator, I can choose if a user should see a tooltip for a glossary term
+
+As editor, I can add a glossary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/glossary.png
     :align: center
     :height: 640px
     :width: 768px
 
-    Create a Glossary.
+As user, I can see a glossary term definition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/usage.png
     :align: center
     :height: 640px
     :width: 768px
 
-    Use it!
+As administrator, I can choose if a user should see a tooltip for a glossary term
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. figure:: https://raw.github.com/kitconcept/kitconcept.glossary/master/docs/controlpanel.png
     :align: center
     :height: 400px
     :width: 768px
-
-    The tooltip can be disabled in the control panel configlet.
 
 
 Installation
@@ -71,14 +82,14 @@ and then run "bin/buildout".
 Contribute
 ----------
 
-- `Source code at Github <https://github.com/collective/kitconcept.glossary>`_
-- `Issue tracker at Github <https://github.com/collective/kitconcept.glossary/issues>`_ or same
+- `Source code at Github <https://github.com/kitconcept/kitconcept.glossary>`_
+- `Issue tracker at Github <https://github.com/kitconcept/kitconcept.glossary/issues>`_ or same
 
 
 Support
 -------
 
-If you are having issues, `please let us know <https://github.com/collective/kitconcept.glossary/issues>`_.
+If you are having issues, `please let us know <https://github.com/kitconcept/kitconcept.glossary/issues>`_.
 
 
 Development
