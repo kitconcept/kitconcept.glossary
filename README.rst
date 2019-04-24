@@ -122,7 +122,7 @@ The development of this plugin has been kindly sponsored by `Humboldt-Universit√
 
 |
 
-.. image:: https://raw.githubusercontent.com/collective/kitconcept.glossary/master/kitconcept.png
+.. image:: https://raw.githubusercontent.com/kitconcept/kitconcept.glossary/master/kitconcept.png
    :alt: kitconcept
    :target: https://kitconcept.com/
 
