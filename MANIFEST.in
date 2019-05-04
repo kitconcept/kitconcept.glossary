@@ -1,4 +1,7 @@
-global-exclude *.pyc
+graft src/kitconcept/glossary
 graft docs
-graft src
 include *.rst
+include *.txt
+global-exclude *.pyc
+global-exclude Makefile
+recursive-exclude webpack *
