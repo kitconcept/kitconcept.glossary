@@ -33,6 +33,7 @@ setup(
     author="kitconcept GmbH",
     author_email="info@kitconcept.com",
     url="https://github.com/kitconcept/kitconcept.glossary",
+    license="GPL version 2",
     packages=find_packages("src"),
     package_dir={"": "src"},
     namespace_packages=["kitconcept"],
