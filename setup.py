@@ -6,9 +6,7 @@ version = "1.0.0a1.dev0"
 description = "Plone add-on product to define a glossary."
 long_description = (
     open("README.rst").read()
-    + "\n"
-    + open("CONTRIBUTORS.rst").read()
-    + "\n"
+    + "\n\n"
     + open("CHANGES.rst").read()
 )
 

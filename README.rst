@@ -2,9 +2,8 @@
    If you want to learn more about writing documentation, please check out: http://docs.plone.org/about/documentation_styleguide.html
    This text does not appear on pypi or github. It is a comment.
 
-==============================================================================
 kitconcept.glossary
-==============================================================================
+===================
 
 .. image:: http://img.shields.io/pypi/v/kitconcept.glossary.svg
     :target: https://pypi.python.org/pypi/kitconcept.glossary
