@@ -52,5 +52,6 @@ install:
 before_script:
   - firefox -v
 script:
+  - bin/pyroma -n 10 -d .
   - make code-analysis
   - make test
