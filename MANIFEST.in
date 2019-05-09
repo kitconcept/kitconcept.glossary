@@ -1,7 +1,12 @@
-graft src/kitconcept/glossary
+graft src/kitconcept/glossarys
 graft docs
 include *.rst
 include *.txt
+exclude *.cfg
+exclude *.yml
+exclude *.yaml
+exclude kitconcept.png
+exclude news
 global-exclude *.pyc
 global-exclude Makefile
 recursive-exclude webpack *
