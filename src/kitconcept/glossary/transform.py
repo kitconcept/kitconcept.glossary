@@ -6,6 +6,7 @@ from lxml import etree
 from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.transformchain.interfaces import ITransform
+from Products.CMFPlone.utils import safe_unicode
 from repoze.xmliter.utils import getHTMLSerializer
 from zope.interface import implementer
 
@@ -15,9 +16,9 @@ from zope.interface import implementer
 ROOT_SELECTOR = '//*[@id="content"]'
 
 # search for element text
-TEXT_SELECTOR = '{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
+TEXT_SELECTOR = u'{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
 
-GLOSSARY_TAG = """
+GLOSSARY_TAG = u"""
 <spam class="highlightedGlossaryTerm"
    data-term="{0}"
    data-definition="{1}"
@@ -54,8 +55,9 @@ class GlossaryTransform(object):
         For more information, see: https://afarkas.github.io/lazysizes
         """
         html = etree.tostring(element)
-        new_html = html.replace(
-            term, GLOSSARY_TAG.format(term, escape(definition), url))
+        new_term = GLOSSARY_TAG.format(
+            safe_unicode(term), escape(safe_unicode(definition)), url)
+        new_html = html.replace(term, new_term)
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)
@@ -96,11 +98,11 @@ class GlossaryTransform(object):
             return
 
         for brain in api.content.find(portal_type='Term'):
-            path = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title)
+            path = TEXT_SELECTOR.format(ROOT_SELECTOR, safe_unicode(brain.Title))
             for el in result.tree.xpath(path):
                 self._apply_glossary(el, brain.Title, brain.definition, brain.getURL())
             for variant in brain.variants:
-                path = TEXT_SELECTOR.format(ROOT_SELECTOR, variant)
+                path = TEXT_SELECTOR.format(ROOT_SELECTOR, safe_unicode(variant))
                 for el in result.tree.xpath(path):
                     self._apply_glossary(el, variant, brain.definition, brain.getURL())
 
