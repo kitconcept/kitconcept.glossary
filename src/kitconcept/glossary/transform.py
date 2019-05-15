@@ -4,20 +4,35 @@ from kitconcept.glossary.interfaces import IGlossarySettings
 from kitconcept.glossary.logger import logger
 from lxml import etree
 from plone import api
-from plone.dexterity.interfaces import IDexterityContent
 from plone.transformchain.interfaces import ITransform
 from repoze.xmliter.utils import getHTMLSerializer
+from zExceptions import NotFound
 from zope.interface import implementer
+from zope.interface import Interface
+
+
+try:
+    from Products.Archetypes.interfaces import IBaseObject
+except ImportError:
+    class IBaseObject(Interface):
+        pass
+
+
+try:
+    from plone.dexterity.interfaces import IDexterityContent
+except ImportError:
+    class IDexterityContent(Interface):
+        pass
 
 
 # to avoid additional network round trips to render content above the fold
 # we only process elements inside the "content" element
-ROOT_SELECTOR = '//*[@id="content"]'
+ROOT_SELECTOR = u'//*[@id="content"]'
 
 # search for element text
-TEXT_SELECTOR = '{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
+TEXT_SELECTOR = u'{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
 
-GLOSSARY_TAG = """
+GLOSSARY_TAG = u"""
 <spam class="highlightedGlossaryTerm"
    data-term="{0}"
    data-definition="{1}"
@@ -83,25 +98,31 @@ class GlossaryTransform(object):
             interface=IGlossarySettings,
             default=[],
         )
-        context = getattr(self.published, 'context', None)
+        path = self.request.environ['PATH_INFO']
+        try:
+            context = api.content.get(path=path)
+        except NotFound:
+            return  # no need to transform
         if context is None:
             return  # no need to transform
-        if not IDexterityContent.providedBy(context):
+        if not IBaseObject.providedBy(context) and \
+           not IDexterityContent.providedBy(context):
             return  # no need to transform
-        if self.published.context.portal_type not in enabled_types:
+        if context.portal_type not in enabled_types:
             return  # no need to transform
-
+        if not result:
+            return  # no need to transform
         result = self._parse(result)
         if result is None:
-            return
+            return  # no need to transform
 
         for brain in api.content.find(portal_type='Term'):
-            path = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title)
-            for el in result.tree.xpath(path):
+            xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title)
+            for el in result.tree.xpath(xpath):
                 self._apply_glossary(el, brain.Title, brain.definition, brain.getURL())
             for variant in brain.variants:
-                path = TEXT_SELECTOR.format(ROOT_SELECTOR, variant)
-                for el in result.tree.xpath(path):
+                xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, variant)
+                for el in result.tree.xpath(xpath):
                     self._apply_glossary(el, variant, brain.definition, brain.getURL())
 
         return result
