@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from AccessControl.unauthorized import Unauthorized
 from cgi import escape
 from kitconcept.glossary.interfaces import IGlossarySettings
 from kitconcept.glossary.logger import logger
@@ -68,9 +69,14 @@ class GlossaryTransform(object):
         """Inject attributes needed by lazysizes to lazy load elements.
         For more information, see: https://afarkas.github.io/lazysizes
         """
+        # https://stackoverflow.com/a/6208001/2116850
+        term = term.decode('utf-8').encode('ascii', 'xmlcharrefreplace')
+        definition = definition.decode(
+            'utf-8').encode('ascii', 'xmlcharrefreplace')
+        definition = escape(definition, quote=True)
         html = etree.tostring(element)
         new_html = html.replace(
-            term, GLOSSARY_TAG.format(term, escape(definition), url))
+            term, GLOSSARY_TAG.format(term, definition, url))
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)
@@ -101,7 +107,7 @@ class GlossaryTransform(object):
         path = self.request.environ['PATH_INFO']
         try:
             context = api.content.get(path=path)
-        except NotFound:
+        except (NotFound, Unauthorized):
             return  # no need to transform
         if context is None:
             return  # no need to transform
