@@ -101,7 +101,7 @@ class GlossaryTransform(object):
         html = parser.unescape(html)
         pattern = re.compile(
             u'(.*)({0})(.*)'.format(term),
-            flags=re.IGNORECASE|re.DOTALL|re.UNICODE,
+            flags=re.IGNORECASE | re.DOTALL | re.UNICODE,
         )
         new_html = pattern.sub(
             self._apply_glossary_tag(term, definition, url), html)
