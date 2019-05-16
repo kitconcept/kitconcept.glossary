@@ -3,7 +3,6 @@ from kitconcept.glossary.testing import INTEGRATION_TESTING
 from kitconcept.glossary.transform import GlossaryTransform
 from plone import api
 
-import lxml
 import unittest
 
 
