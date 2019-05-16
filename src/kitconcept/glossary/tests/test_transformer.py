@@ -21,71 +21,55 @@ class TransformerTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-        self.request.response.setHeader('Content-Type', 'text/html')
-        self.transformer = GlossaryTransform(None, self.request)
+        portal = self.layer['portal']
+        request = self.layer['request']
+        request.response.setHeader('Content-Type', 'text/html')
+        self.transformer = GlossaryTransform(None, request)
 
         with api.env.adopt_roles(['Manager']):
-            self.glossary = api.content.create(
-                container=self.portal,
+            document = api.content.create(
+                container=portal,
+                type='Document',
+                title='Document',
+            )
+            glossary = api.content.create(
+                container=portal,
                 type='Glossary',
                 title=u'Glossary',
             )
 
         api.content.create(
-            container=self.glossary,
+            container=glossary,
             type='Term',
             title=u'Term',
         )
         api.content.create(
-            container=self.glossary,
+            container=glossary,
             type='Term',
             title=u'Universität',
         )
         api.content.create(
-            container=self.glossary,
+            container=glossary,
             type='Term',
             title=u'CASE Insensitive',
         )
 
-    def test_glossary_applied(self):
-        with api.env.adopt_roles(['Manager']):
-            document = api.content.create(
-                container=self.portal,
-                type='Document',
-                title='Document',
-            )
-        self.request.environ['PATH_INFO'] = '/'.join(
+        request.environ['PATH_INFO'] = '/'.join(
             document.getPhysicalPath())
+
+    def test_glossary_applied(self):
         html = HTML.format(text=u'Glossary Term')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
             result.tree.xpath('//*[@class="highlightedGlossaryTerm"]'))
 
     def test_accents(self):
-        with api.env.adopt_roles(['Manager']):
-            document = api.content.create(
-                container=self.portal,
-                type='Document',
-                title='Document',
-            )
-        self.request.environ['PATH_INFO'] = '/'.join(
-            document.getPhysicalPath())
         html = HTML.format(text=u'Plone Universität')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
             result.tree.xpath('//*[@class="highlightedGlossaryTerm"]'))
 
     def test_case_insensitive(self):
-        with api.env.adopt_roles(['Manager']):
-            document = api.content.create(
-                container=self.portal,
-                type='Document',
-                title='Document',
-            )
-        self.request.environ['PATH_INFO'] = '/'.join(
-            document.getPhysicalPath())
         html = HTML.format(text=u'case insensitive')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
