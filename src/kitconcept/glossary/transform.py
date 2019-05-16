@@ -16,7 +16,7 @@ import re
 
 
 try:
-    # Python 2.6-2.7 
+    # Python 2.6-2.7
     from HTMLParser import HTMLParser
 except ImportError:
     # Python 3
