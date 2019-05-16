@@ -30,23 +30,23 @@ class TransformerTestCase(unittest.TestCase):
             self.glossary = api.content.create(
                 container=self.portal,
                 type='Glossary',
-                title='Glossary',
+                title=u'Glossary',
             )
 
         api.content.create(
             container=self.glossary,
             type='Term',
-            title='Term',
+            title=u'Term',
         )
         api.content.create(
             container=self.glossary,
             type='Term',
-            title='Universität',
+            title=u'Universität',
         )
         api.content.create(
             container=self.glossary,
             type='Term',
-            title='CASE Insensitive',
+            title=u'CASE Insensitive',
         )
 
     def test_glossary_applied(self):
