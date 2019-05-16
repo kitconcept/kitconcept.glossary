@@ -6,10 +6,21 @@ from kitconcept.glossary.logger import logger
 from lxml import etree
 from plone import api
 from plone.transformchain.interfaces import ITransform
+from Products.CMFPlone.utils import safe_unicode
 from repoze.xmliter.utils import getHTMLSerializer
 from zExceptions import NotFound
 from zope.interface import implementer
 from zope.interface import Interface
+
+import re
+
+
+try:
+    # Python 2.6-2.7 
+    from HTMLParser import HTMLParser
+except ImportError:
+    # Python 3
+    from html.parser import HTMLParser
 
 
 try:
@@ -30,15 +41,15 @@ except ImportError:
 # we only process elements inside the "content" element
 ROOT_SELECTOR = u'//*[@id="content"]'
 
-# search for element text
-TEXT_SELECTOR = u'{0}//*[contains(concat(" ", normalize-space(text()), " "), " {1} ")]'
+# search for element text: https://stackoverflow.com/a/2756994/2116850
+TEXT_SELECTOR = u'{0}//*[re:match(text(), "{1}", "gi")]'
 
 GLOSSARY_TAG = u"""
 <spam class="highlightedGlossaryTerm"
    data-term="{0}"
-   data-definition="{1}"
-   data-url="{2}">
-    {0}
+   data-definition="{2}"
+   data-url="{3}">
+    {1}
 </spam>
 """
 
@@ -65,18 +76,35 @@ class GlossaryTransform(object):
         except (AttributeError, TypeError, etree.ParseError):
             return
 
+    def _apply_glossary_tag(self, term, definition, url):
+        """This method is needed just to keep the original case of term
+        """
+        def currying(match):
+            before = match.group(1)
+            matched_term = match.group(2)
+            after = match.group(3)
+            return '{0}{1}{2}'.format(
+                before,
+                GLOSSARY_TAG.format(term, matched_term, definition, url),
+                after
+            )
+        return currying
+
     def _apply_glossary(self, element, term, definition, url):
         """Inject attributes needed by lazysizes to lazy load elements.
         For more information, see: https://afarkas.github.io/lazysizes
         """
-        # https://stackoverflow.com/a/6208001/2116850
-        term = term.decode('utf-8').encode('ascii', 'xmlcharrefreplace')
-        definition = definition.decode(
-            'utf-8').encode('ascii', 'xmlcharrefreplace')
-        definition = escape(definition, quote=True)
+        term = safe_unicode(term)
+        definition = escape(safe_unicode(definition), quote=True)
+        parser = HTMLParser()
         html = etree.tostring(element)
-        new_html = html.replace(
-            term, GLOSSARY_TAG.format(term, definition, url))
+        html = parser.unescape(html)
+        pattern = re.compile(
+            u'(.*)({0})(.*)'.format(term),
+            flags=re.IGNORECASE|re.DOTALL|re.UNICODE,
+        )
+        new_html = pattern.sub(
+            self._apply_glossary_tag(term, definition, url), html)
         new_element = etree.fromstring(new_html)
         parent = element.getparent()
         parent.replace(element, new_element)
@@ -107,7 +135,7 @@ class GlossaryTransform(object):
         path = self.request.environ['PATH_INFO']
         try:
             context = api.content.get(path=path)
-        except (NotFound, Unauthorized):
+        except (IndexError, NotFound, Unauthorized):
             return  # no need to transform
         if context is None:
             return  # no need to transform
@@ -123,12 +151,14 @@ class GlossaryTransform(object):
             return  # no need to transform
 
         for brain in api.content.find(portal_type='Term'):
-            xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title)
-            for el in result.tree.xpath(xpath):
+            xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title.lower())
+            for el in result.tree.xpath(
+                xpath, namespaces={"re": "http://exslt.org/regular-expressions"}):
                 self._apply_glossary(el, brain.Title, brain.definition, brain.getURL())
             for variant in brain.variants:
-                xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, variant)
-                for el in result.tree.xpath(xpath):
+                xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, variant.lower())
+                for el in result.tree.xpath(
+                    xpath, namespaces={"re": "http://exslt.org/regular-expressions"}):
                     self._apply_glossary(el, variant, brain.definition, brain.getURL())
 
         return result
