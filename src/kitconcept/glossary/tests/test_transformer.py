@@ -58,7 +58,7 @@ class TransformerTestCase(unittest.TestCase):
             )
         self.request.environ['PATH_INFO'] = '/'.join(
             document.getPhysicalPath())
-        html = HTML.format(text='Glossary Term')
+        html = HTML.format(text=u'Glossary Term')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
             result.tree.xpath('//*[@class="highlightedGlossaryTerm"]'))
@@ -72,7 +72,7 @@ class TransformerTestCase(unittest.TestCase):
             )
         self.request.environ['PATH_INFO'] = '/'.join(
             document.getPhysicalPath())
-        html = HTML.format(text='Plone Universität')
+        html = HTML.format(text=u'Plone Universität')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
             result.tree.xpath('//*[@class="highlightedGlossaryTerm"]'))
@@ -86,7 +86,7 @@ class TransformerTestCase(unittest.TestCase):
             )
         self.request.environ['PATH_INFO'] = '/'.join(
             document.getPhysicalPath())
-        html = HTML.format(text='case insensitive')
+        html = HTML.format(text=u'case insensitive')
         result = self.transformer.transformIterable(html, 'utf-8')
         self.assertTrue(
             result.tree.xpath('//*[@class="highlightedGlossaryTerm"]'))
