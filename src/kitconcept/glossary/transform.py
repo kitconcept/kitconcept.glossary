@@ -151,13 +151,13 @@ class GlossaryTransform(object):
             return  # no need to transform
 
         for brain in api.content.find(portal_type='Term'):
-            xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, brain.Title.lower())
+            xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, safe_unicode(brain.Title))
             elements = result.tree.xpath(
                 xpath, namespaces={"re": "http://exslt.org/regular-expressions"})
             for el in elements:
                 self._apply_glossary(el, brain.Title, brain.definition, brain.getURL())
             for variant in brain.variants:
-                xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, variant.lower())
+                xpath = TEXT_SELECTOR.format(ROOT_SELECTOR, safe_unicode(variant))
                 elements = result.tree.xpath(
                     xpath, namespaces={"re": "http://exslt.org/regular-expressions"})
                 for el in elements:
