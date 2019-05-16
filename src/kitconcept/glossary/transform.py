@@ -77,7 +77,7 @@ class GlossaryTransform(object):
             return
 
     def _apply_glossary_tag(self, term, definition, url):
-        """This method is needed just to keep the original case of term
+        """This method is needed just to keep the original case (upper/lower) of term
         """
         def currying(match):
             before = match.group(1)
