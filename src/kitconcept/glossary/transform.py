@@ -83,10 +83,10 @@ class GlossaryTransform(object):
             before = match.group(1)
             matched_term = match.group(2)
             after = match.group(3)
-            return '{0}{1}{2}'.format(
+            return u'{0}{1}{2}'.format(
                 before,
                 GLOSSARY_TAG.format(term, matched_term, definition, url),
-                after
+                after,
             )
         return currying
 
