@@ -5,6 +5,8 @@ include *.txt
 exclude *.cfg
 exclude *.yml
 exclude *.yaml
+exclude .coveragerc
+exclude .eslintrc
 exclude kitconcept.png
 exclude news
 global-exclude *.pyc
