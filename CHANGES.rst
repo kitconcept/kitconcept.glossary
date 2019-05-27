@@ -4,7 +4,8 @@ Changelog
 1.0.0a3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Exclude from navigation by default for Term items.
+  [rodfersou]
 
 
 1.0.0a2 (2019-05-27)
