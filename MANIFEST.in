@@ -9,6 +9,7 @@ exclude .coveragerc
 exclude .eslintrc
 exclude kitconcept.png
 exclude news
+exclude webpack
 global-exclude *.pyc
 global-exclude Makefile
 recursive-exclude webpack *
