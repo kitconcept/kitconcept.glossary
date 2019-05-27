@@ -32,6 +32,8 @@ def textIndexer(context):
 
 @indexer(ITerm)
 def variantsIndexer(context):
+    if not context.variants:
+        return []
     return context.variants
 
 
