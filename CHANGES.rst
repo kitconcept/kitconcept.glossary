@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0a2 (unreleased)
+1.0.0a2 (2019-05-27)
 --------------------
 
 - Add support for Archetypes.
