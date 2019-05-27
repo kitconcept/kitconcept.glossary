@@ -4,7 +4,8 @@ Changelog
 1.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Add support for Archetypes.
+  [rodfersou]
 
 
 1.0.0a1 (2019-05-09)
