@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = "1.0.0a3"
+version = "1.0.0a4.dev0"
 description = "Plone add-on product to define a glossary."
 long_description = (
     open("README.rst").read()
