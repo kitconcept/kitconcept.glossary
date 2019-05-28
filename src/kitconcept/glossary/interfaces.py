@@ -3,6 +3,9 @@ from kitconcept.glossary import _
 from kitconcept.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
+from plone.supermodel import model
+from z3c.form.interfaces import IAddForm
+from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.interface import Interface
 
@@ -69,3 +72,27 @@ class ITerm(Interface):
         description=_(u'Enter the body text.'),
         required=False,
     )
+
+    model.fieldset(
+        'settings',
+        label=_(u"Settings"),
+        fields=['exclude_from_nav']
+    )
+
+    # https://community.plone.org/t/how-to-change-existing-dexterity-types-and-behaviors/219/6
+    exclude_from_nav = schema.Bool(
+        title=_(
+            u'label_exclude_from_nav',
+            default=u'Exclude from navigation'
+        ),
+        description=_(
+            u'help_exclude_from_nav',
+            default=u'If selected, this item will not appear in the '
+                    u'navigation tree'
+        ),
+        default=True,  # Need to be True
+    )
+
+    form.omitted('exclude_from_nav')
+    form.no_omit(IEditForm, 'exclude_from_nav')
+    form.no_omit(IAddForm, 'exclude_from_nav')

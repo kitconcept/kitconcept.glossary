@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:upgradeDepends
+    source="1"
+    destination="2"
+    profile="kitconcept.glossary:default"
+    title="Remove exclude from navigation behavior"
+    import_steps="typeinfo"
+    />
+
+</configure>
