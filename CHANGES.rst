@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0a3 (unreleased)
+1.0.0a3 (2019-05-28)
 --------------------
 
 - The default exclude_from_navigation behavior always return default value
