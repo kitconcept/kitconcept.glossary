@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from kitconcept.glossary import _
 from kitconcept.glossary.config import DEFAULT_ENABLED_CONTENT_TYPES
-from plone.app.dexterity import _ as PADMF
 from plone.app.textfield import RichText
 from plone.autoform import directives as form
 from plone.supermodel import model
@@ -82,11 +81,11 @@ class ITerm(Interface):
 
     # https://community.plone.org/t/how-to-change-existing-dexterity-types-and-behaviors/219/6
     exclude_from_nav = schema.Bool(
-        title=PADMF(
+        title=_(
             u'label_exclude_from_nav',
             default=u'Exclude from navigation'
         ),
-        description=PADMF(
+        description=_(
             u'help_exclude_from_nav',
             default=u'If selected, this item will not appear in the '
                     u'navigation tree'
