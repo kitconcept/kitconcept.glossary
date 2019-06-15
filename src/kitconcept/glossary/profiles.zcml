@@ -23,7 +23,7 @@
       i18n:attributes="title; description"
       />
 
-  <include package=".upgrades" />
+  <include file="upgrades.zcml" />
 
   <utility factory=".setuphandlers.HiddenProfiles" name="kitconcept.glossary" />
 
