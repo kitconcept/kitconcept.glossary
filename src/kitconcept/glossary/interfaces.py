@@ -28,13 +28,26 @@ class IGlossarySettings(Interface):
     enabled_content_types = schema.List(
         title=_(u'Enabled Content Types'),
         description=_(
-            u'Only objects of these content types will display glossary terms.'),
+            u'Only objects of these content types will display '
+            u'glossary terms.'),
         required=False,
         default=DEFAULT_ENABLED_CONTENT_TYPES,
         # we are going to list only the main content types in the widget
         value_type=schema.Choice(
             vocabulary=u'kitconcept.glossary.PortalTypes'),
     )
+
+    description_length = schema.Int(
+        title=_(u'Description length'),
+        required=True,
+        default=100,
+        )
+
+    description_limiter = schema.TextLine(
+        title=_(u'Description ellipsis'),
+        required=True,
+        default=u'…',
+        )
 
 
 class IGlossary(Interface):

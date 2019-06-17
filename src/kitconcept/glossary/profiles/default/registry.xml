@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
 <registry>
-  <records interface="kitconcept.glossary.interfaces.IGlossarySettings" />
+  <records interface="kitconcept.glossary.interfaces.IGlossarySettings">
+    <value key="description_length">100</value>
+    <value key="description_limiter">…</value>
+  </records>
 </registry>

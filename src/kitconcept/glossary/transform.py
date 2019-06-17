@@ -118,11 +118,16 @@ class GlossaryTransform(object):
 
     def transformIterable(self, result, encoding):
         # user is authenticated, check if transform is enabled
-        enabled = api.portal.get_registry_record(
-            name='enable_tooltip',
-            interface=IGlossarySettings,
-            default=False,
-        )
+        try:
+            enabled = api.portal.get_registry_record(
+                name='enable_tooltip',
+                interface=IGlossarySettings,
+                default=False,
+                )
+        except KeyError:
+            # Required to be able to update the schema
+            return
+
         if not enabled:
             return  # no need to transform
 

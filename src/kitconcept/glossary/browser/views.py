@@ -10,9 +10,9 @@ from zExceptions import Redirect
 
 import string
 
+from kitconcept.glossary.interfaces import IGlossarySettings
 
 BATCH_SIZE = 30
-DESCRIPTION_LENGTH = 0
 
 
 def _catalog_counter_cachekey(method, self):
@@ -119,14 +119,21 @@ class GlossaryView(BrowserView):
     def truncateDescription(self, text):
         """Truncate definition using tool properties"""
 
-        max_length = DESCRIPTION_LENGTH
+        max_length = api.portal.get_registry_record(
+                name='description_length',
+                interface=IGlossarySettings,
+                )
+        ellipsis = api.portal.get_registry_record(
+                name='description_limiter',
+                interface=IGlossarySettings,
+                )
+
         text = safe_unicode(text).strip()
 
         if max_length > 0 and len(text) > max_length:
-            ellipsis = self.description_ellipsis
             text = text[:max_length]
             text = text.strip()
-            text = '{0} {1}'.format(text, ellipsis)
+            text = u'{0}{1}'.format(text, ellipsis)
 
         text = text.encode('utf-8', 'replace')
 

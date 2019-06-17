@@ -19,4 +19,12 @@
     import_steps="typeinfo"
     />
 
+  <genericsetup:upgradeDepends
+    source="2"
+    destination="3"
+    profile="kitconcept.glossary:default"
+    title="Update IGlosarySettings"
+    import_steps="plone.app.registry"
+    />
+
 </configure>

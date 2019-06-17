@@ -4,7 +4,8 @@ Changelog
 1.0.0a4 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Show definition in list view with configurable truncation.
+  [csenger]
 
 
 1.0.0a3 (2019-05-28)

@@ -15,7 +15,7 @@
 
       <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-      <div class="documentDescription"
+      <div class="termDescription"
           tal:content="structure context/definition/output|nothing">Definition</div>
 
       <div class="variants"
