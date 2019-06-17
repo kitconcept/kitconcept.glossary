@@ -10,4 +10,13 @@
     import_steps="typeinfo"
     />
 
+  <!-- 2 to 3 -->
+  <genericsetup:upgradeDepends
+    source="2"
+    destination="3"
+    profile="kitconcept.glossary:default"
+    title="Remove Glossary type description"
+    import_steps="typeinfo"
+    />
+
 </configure>

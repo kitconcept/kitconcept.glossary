@@ -43,7 +43,6 @@ class IGlossary(Interface):
 
     text = RichText(
         title=_(u'Body text'),
-        description=_(u'Enter the body text.'),
         required=False,
     )
 
@@ -54,7 +53,6 @@ class ITerm(Interface):
 
     title = schema.TextLine(
         title=_(u'Term'),
-        description=_(u'Enter the term to be defined.'),
         required=True,
     )
 
