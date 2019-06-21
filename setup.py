@@ -45,6 +45,7 @@ setup(
         "plone.app.registry",
         "plone.dexterity",
         "plone.namedfile",
+        "plone.restapi",
         "Products.CMFPlone >=4.3",
         "Products.GenericSetup",
         "setuptools",
