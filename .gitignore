@@ -4,6 +4,7 @@
 *.mo
 *.pyc
 *~
+.#*
 .coverage
 .installed.cfg
 .mr.developer.cfg
@@ -23,3 +24,4 @@ parts/
 src/kitconcept.*
 src/plone.*
 var/
+local/
