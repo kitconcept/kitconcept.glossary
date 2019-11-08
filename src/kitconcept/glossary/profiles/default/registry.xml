@@ -4,9 +4,4 @@
     <value key="description_length">100</value>
     <value key="description_limiter">…</value>
   </records>
-  <record name="plone.displayed_types" interface="Products.CMFPlone.interfaces.controlpanel.INavigationSchema" field="displayed_types">
-    <value purge="false">
-      <element purge="true">Glossary</element>
-    </value>
-  </record>
 </registry>
