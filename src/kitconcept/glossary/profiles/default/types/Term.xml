@@ -5,7 +5,7 @@
 
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Term</property>
-  <property name="description" i18n:translate="">A Term</property>
+  <property name="description" i18n:translate=""></property>
   <property name="content_icon">++resource++kitconcept.glossary/img/term-icon.png</property>
   <property name="allow_discussion">False</property>
   <property name="global_allow">False</property>
