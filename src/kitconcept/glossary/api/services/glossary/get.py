@@ -18,7 +18,7 @@ class GetGlossaryTerms(Service):
         return [{'id': brain['id'],
                  'title': brain['Title'],
                  'terms': [brain['Title']] + list(brain['variants']),
-                 'definition': brain['definition'],
+                 'definition': brain['definition'] or '',
                  'url': brain.getURL(),
                  }
                 for brain in brains]
