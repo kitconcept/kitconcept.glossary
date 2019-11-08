@@ -4,6 +4,9 @@ Changelog
 1.0.0a4 (unreleased)
 --------------------
 
+- Use Portal Transforms transformation to generate glossary entries.
+  [csenger]
+
 - Show definition in list view with configurable truncation.
   [csenger]
 
