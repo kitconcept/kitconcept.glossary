@@ -8,8 +8,9 @@ $(() => {
   function setHeader(xhr) {
     xhr.setRequestHeader("Accept", "application/json");
   }
+  var portalURL = jQuery("body").data('portal-url');
   jQuery.ajax({
-    url: "@glossary_terms",
+    url: portalURL + "/@glossary_terms",
     dataType: "json",
     success: data => {
       var gm = new GlossaryMarker(data);
