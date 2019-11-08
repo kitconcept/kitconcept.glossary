@@ -25,3 +25,5 @@ src/kitconcept.*
 src/plone.*
 var/
 local/
+pyvenv.cfg
+
