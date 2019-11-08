@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-06-17 07:29+0000\n"
+"POT-Creation-Date: 2019-11-08 12:19+0000\n"
 "PO-Revision-Date: 2019-06-17 09:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,38 +20,51 @@ msgstr ""
 msgid "A Dexterity-based content type to define a glossary and its terms."
 msgstr ""
 
-#: kitconcept/glossary/profiles/default/types/Term.xml
-msgid "A Term"
+#: kitconcept/glossary/interfaces.py:58
+msgid "Body text"
+msgstr "Text"
+
+#: kitconcept/glossary/interfaces.py:47
+msgid "Description ellipsis"
 msgstr ""
 
-#: kitconcept/glossary/interfaces.py:45
-msgid "Body text"
+#: kitconcept/glossary/interfaces.py:41
+msgid "Description length"
 msgstr ""
 
 #: kitconcept/glossary/interfaces.py:24
 msgid "Enable tooltip."
-msgstr ""
+msgstr "Tooltip aktivieren"
 
 #: kitconcept/glossary/interfaces.py:23
 msgid "Enable tooltip?"
-msgstr ""
+msgstr "Tooltip aktivieren?"
 
 #: kitconcept/glossary/interfaces.py:29
 msgid "Enabled Content Types"
 msgstr ""
 
-#: kitconcept/glossary/interfaces.py:70
+#: kitconcept/glossary/interfaces.py:81
 msgid "Enter the body text."
 msgstr ""
 
-#: kitconcept/glossary/interfaces.py:62
+#: kitconcept/glossary/interfaces.py:73
 msgid "Enter the variants of the term, one per line."
 msgstr "Alternative Bezeichnungen, je Zeile ein Begriff"
 
-#: kitconcept/glossary/controlpanel.py:12 kitconcept/glossary/profiles.zcml:15
+#: kitconcept/glossary/controlpanel.py:12
+#: kitconcept/glossary/profiles.zcml:15
 #: kitconcept/glossary/profiles/default/controlpanel.xml
 msgid "Glossary"
 msgstr "Glossar"
+
+#: kitconcept/glossary/interfaces.py:66
+msgid "Glossary Term"
+msgstr "Glossareintrag"
+
+#: kitconcept/glossary/profiles/default/types/GlossaryTerm.xml
+msgid "GlossaryTerm"
+msgstr ""
 
 #: kitconcept/glossary/interfaces.py:30
 msgid "Only objects of these content types will display glossary terms."
@@ -61,33 +74,28 @@ msgstr ""
 msgid "Search"
 msgstr "Suche"
 
-#: kitconcept/glossary/interfaces.py:76
+#: kitconcept/glossary/interfaces.py:87
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: kitconcept/glossary/controlpanel.py:13
 msgid "Settings for the kitconcept.glossary package"
 msgstr ""
 
-#: kitconcept/glossary/interfaces.py:55
-#: kitconcept/glossary/profiles/default/types/Term.xml
-msgid "Term"
-msgstr "Glossareintrag"
-
 #: kitconcept/glossary/profiles.zcml:24
 msgid "Uninstall kitconcept.glossary."
 msgstr ""
 
-#: kitconcept/glossary/interfaces.py:61
+#: kitconcept/glossary/interfaces.py:72
 msgid "Variants"
 msgstr "Varianten"
 
-#: kitconcept/glossary/browser/templates/term.pt:23
+#: kitconcept/glossary/browser/templates/term.pt:17
 msgid "Variants:"
 msgstr "Varianten:"
 
 #. Default: "If selected, this item will not appear in the navigation tree"
-#: kitconcept/glossary/interfaces.py:86
+#: kitconcept/glossary/interfaces.py:97
 msgid "help_exclude_from_nav"
 msgstr ""
 
@@ -96,7 +104,7 @@ msgid "kitconcept.glossary: uninstall"
 msgstr ""
 
 #. Default: "Exclude from navigation"
-#: kitconcept/glossary/interfaces.py:82
+#: kitconcept/glossary/interfaces.py:93
 msgid "label_exclude_from_nav"
 msgstr ""
 
