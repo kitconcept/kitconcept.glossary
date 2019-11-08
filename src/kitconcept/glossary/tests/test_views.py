@@ -21,12 +21,12 @@ class BaseViewTestCase(unittest.TestCase):
                 title='Glossary',
                 description='Glossary Description')
             self.t1 = api.content.create(
-                self.g1, 'Term', 't1',
+                self.g1, 'GlossaryTerm', 't1',
                 title='First Term',
                 definition=RichTextValue(
                     'First Term Description', 'text/html', 'text/html'))
             self.t2 = api.content.create(
-                self.g1, 'Term', 't2',
+                self.g1, 'GlossaryTerm', 't2',
                 title='Second Term',
                 definition=RichTextValue(
                     'Second Term Description', 'text/html', 'text/html'))

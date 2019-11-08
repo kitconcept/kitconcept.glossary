@@ -13,7 +13,7 @@ class GetGlossaryTerms(Service):
         return {"error": {"type": type, "message": message}}
 
     def reply(self):
-        brains = api.content.find(portal_type='Term')
+        brains = api.content.find(portal_type='GlossaryTerm')
 
         return [{'id': brain['id'],
                  'title': brain['Title'],

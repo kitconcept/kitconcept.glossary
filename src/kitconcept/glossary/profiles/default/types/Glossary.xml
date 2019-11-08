@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<object name="Glossary" meta_type="Dexterity FTI"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="kitconcept.glossary">
+<object name="Glossary" meta_type="Dexterity FTI" 
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="kitconcept.glossary">
 
   <!-- Basic metadata -->
   <property name="title" i18n:translate="">Glossary</property>
@@ -11,7 +10,7 @@
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="Term" />
+    <element value="GlossaryTerm" />
   </property>
 
   <!-- schema interface -->
@@ -43,12 +42,10 @@
   <alias from="view" to="(selected layout)"/>
 
   <!-- Actions -->
-  <action title="View" action_id="view" category="object" condition_expr=""
-      url_expr="string:${object_url}" visible="True">
+  <action title="View" action_id="view" category="object" condition_expr="" url_expr="string:${object_url}" visible="True">
     <permission value="View"/>
   </action>
-  <action title="Edit" action_id="edit" category="object" condition_expr=""
-      url_expr="string:${object_url}/edit" visible="True">
+  <action title="Edit" action_id="edit" category="object" condition_expr="" url_expr="string:${object_url}/edit" visible="True">
     <permission value="Modify portal content"/>
   </action>
 </object>

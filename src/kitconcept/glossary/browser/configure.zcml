@@ -28,7 +28,7 @@
 
   <browser:page
       name="view"
-      for="kitconcept.glossary.interfaces.ITerm"
+      for="kitconcept.glossary.interfaces.IGlossaryTerm"
       class=".views.TermView"
       template="templates/term.pt"
       permission="zope2.View"

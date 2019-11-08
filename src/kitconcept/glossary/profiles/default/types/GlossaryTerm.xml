@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
-<object name="Term" meta_type="Dexterity FTI"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="kitconcept.glossary">
+<object name="GlossaryTerm" meta_type="Dexterity FTI" 
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="kitconcept.glossary">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Term</property>
+  <property name="title" i18n:translate="">GlossaryTerm</property>
   <property name="description" i18n:translate=""></property>
   <property name="content_icon">++resource++kitconcept.glossary/img/term-icon.png</property>
   <property name="allow_discussion">False</property>
@@ -13,13 +12,13 @@
   <property name="allowed_content_types" />
 
   <!-- schema interface -->
-  <property name="schema">kitconcept.glossary.interfaces.ITerm</property>
+  <property name="schema">kitconcept.glossary.interfaces.IGlossaryTerm</property>
 
   <!-- class used for content items -->
-  <property name="klass">kitconcept.glossary.content.Term</property>
+  <property name="klass">kitconcept.glossary.content.GlossaryTerm</property>
 
   <!-- add permission -->
-  <property name="add_permission">kitconcept.glossary.AddTerm</property>
+  <property name="add_permission">kitconcept.glossary.AddGlossaryTerm</property>
 
   <!-- enabled behaviors -->
   <property name="behaviors">
@@ -40,12 +39,10 @@
   <alias from="view" to="(selected layout)"/>
 
   <!-- Actions -->
-  <action title="View" action_id="view" category="object" condition_expr=""
-      url_expr="string:${object_url}" visible="True">
+  <action title="View" action_id="view" category="object" condition_expr="" url_expr="string:${object_url}" visible="True">
     <permission value="View"/>
   </action>
-  <action title="Edit" action_id="edit" category="object" condition_expr=""
-      url_expr="string:${object_url}/edit" visible="True">
+  <action title="Edit" action_id="edit" category="object" condition_expr="" url_expr="string:${object_url}/edit" visible="True">
     <permission value="Modify portal content"/>
   </action>
 </object>

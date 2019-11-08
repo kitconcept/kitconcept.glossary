@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from kitconcept.glossary.interfaces import ITerm
+from kitconcept.glossary.interfaces import IGlossaryTerm
 from plone.app.textfield.interfaces import ITransformer
 from plone.i18n.normalizer.base import baseNormalize
 from plone.indexer import indexer
 from Products.CMFPlone.utils import safe_unicode
 
 
-@indexer(ITerm)
+@indexer(IGlossaryTerm)
 def textIndexer(context):
     """SearchableText contains id, title, variants and definition
     text as plain text.
@@ -30,19 +30,19 @@ def textIndexer(context):
     ))
 
 
-@indexer(ITerm)
+@indexer(IGlossaryTerm)
 def variantsIndexer(context):
     if not context.variants:
         return []
     return context.variants
 
 
-@indexer(ITerm)
+@indexer(IGlossaryTerm)
 def definitionIndexer(context):
     return context.definition.raw
 
 
-@indexer(ITerm)
+@indexer(IGlossaryTerm)
 def letterIndexer(context):
     if not context.title:
         return u''

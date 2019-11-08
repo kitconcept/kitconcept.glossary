@@ -7,7 +7,7 @@
       <role name="Owner"/>
       <role name="Contributor"/>
     </permission>
-    <permission name="kitconcept.glossary: Add Term" acquire="True">
+    <permission name="kitconcept.glossary: Add Glossary Term" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
       <role name="Owner"/>

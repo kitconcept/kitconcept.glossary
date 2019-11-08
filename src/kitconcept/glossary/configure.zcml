@@ -16,8 +16,8 @@
       />
 
   <permission
-      id="kitconcept.glossary.AddTerm"
-      title="kitconcept.glossary: Add Term"
+      id="kitconcept.glossary.AddGlossaryTerm"
+      title="kitconcept.glossary: Add Glossary Term"
       />
 
   <include package=".api" />
