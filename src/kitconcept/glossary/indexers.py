@@ -14,20 +14,22 @@ def textIndexer(context):
     transformer = ITransformer(context)
 
     try:
-        definition = transformer(context.definition, 'text/plain')
+        definition = transformer(context.definition, "text/plain")
     except AttributeError:
-        definition = u''
+        definition = u""
     try:
-        variants = u' '.join(context.variants)
+        variants = u" ".join(context.variants)
     except TypeError:
-        variants = u''
+        variants = u""
 
-    return u' '.join((
-        safe_unicode(context.id),
-        safe_unicode(context.title) or u'',
-        safe_unicode(variants),
-        safe_unicode(definition),
-    ))
+    return u" ".join(
+        (
+            safe_unicode(context.id),
+            safe_unicode(context.title) or u"",
+            safe_unicode(variants),
+            safe_unicode(definition),
+        )
+    )
 
 
 @indexer(IGlossaryTerm)
@@ -45,5 +47,5 @@ def definitionIndexer(context):
 @indexer(IGlossaryTerm)
 def letterIndexer(context):
     if not context.title:
-        return u''
+        return u""
     return baseNormalize(context.title)[0].upper()

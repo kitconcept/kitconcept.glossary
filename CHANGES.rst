@@ -4,7 +4,8 @@ Changelog
 1.0.0a5 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Black.
+  [timo]
 
 
 1.0.0a4 (2019-11-08)

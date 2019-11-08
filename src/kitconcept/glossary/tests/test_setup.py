@@ -1,57 +1,85 @@
 # -*- coding: utf-8 -*-
-from kitconcept.glossary.config import PROJECTNAME
 from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone.browserlayer.utils import registered_layers
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone import api
 
 import unittest
 
+try:
+    from Products.CMFPlone.factory import _IMREALLYPLONE5
+
+    _IMREALLYPLONE5  # noqa
+except ImportError:
+    PLONE_5 = False
+else:
+    PLONE_5 = True
+
+try:
+    from Products.CMFPlone.utils import get_installer
+except ImportError:
+    get_installer = None
+
 
 class InstallTestCase(unittest.TestCase):
-
-    """Ensure product is properly installed."""
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
+        if get_installer:
+            self.installer = get_installer(self.portal, self.layer['request'])
+        else:
+            self.installer = api.portal.get_tool('portal_quickinstaller')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.installer.installProducts(['kitconcept.glossary'])
 
-    def test_installed(self):
-        qi = self.portal['portal_quickinstaller']
-        self.assertTrue(qi.isProductInstalled(PROJECTNAME))
+    def test_product_installed(self):
+        self.assertTrue(self.installer.isProductInstalled(
+            'kitconcept.glossary'))
 
     def test_addon_layer(self):
         layers = [l.getName() for l in registered_layers()]
-        self.assertIn('IGlossaryLayer', layers)
+        self.assertIn("IGlossaryLayer", layers)
 
     def test_add_glossary_permission(self):
-        permission = 'kitconcept.glossary: Add Glossary'
+        permission = "kitconcept.glossary: Add Glossary"
         roles = self.portal.rolesOfPermission(permission)
-        roles = [r['name'] for r in roles if r['selected']]
-        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
+        roles = [r["name"] for r in roles if r["selected"]]
+        expected = ["Contributor", "Manager", "Owner", "Site Administrator"]
         self.assertListEqual(roles, expected)
 
     def test_add_term_permission(self):
-        permission = 'kitconcept.glossary: Add Glossary Term'
+        permission = "kitconcept.glossary: Add Glossary Term"
         roles = self.portal.rolesOfPermission(permission)
-        roles = [r['name'] for r in roles if r['selected']]
-        expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
+        roles = [r["name"] for r in roles if r["selected"]]
+        expected = ["Contributor", "Manager", "Owner", "Site Administrator"]
         self.assertListEqual(roles, expected)
 
 
 class UninstallTestCase(unittest.TestCase):
 
-    """Ensure product is properly uninstalled."""
-
     layer = INTEGRATION_TESTING
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.qi = self.portal['portal_quickinstaller']
-        self.qi.uninstallProducts(products=[PROJECTNAME])
+        if get_installer:
+            self.installer = get_installer(self.portal, self.layer['request'])
+        else:
+            self.installer = api.portal.get_tool('portal_quickinstaller')
+        roles_before = api.user.get_roles(TEST_USER_ID)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.installer.uninstallProducts(['kitconcept.glossary'])
+        setRoles(self.portal, TEST_USER_ID, roles_before)
 
-    def test_uninstalled(self):
-        self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
+    def test_product_uninstalled(self):
+        self.assertFalse(
+            self.installer.isProductInstalled('kitconcept.glossary')
+        )
 
-    def test_addon_layer_removed(self):
-        layers = [l.getName() for l in registered_layers()]
-        self.assertNotIn('IGlossaryLayer', layers)
+    # def test_browserlayer_removed(self):
+    #     from kitconcept.glossary.interfaces import IGlossaryLayer
+    #     from plone.browserlayer import utils
+
+    #     self.assertNotIn(IGlossaryLayer, utils.registered_layers())
