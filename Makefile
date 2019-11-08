@@ -82,7 +82,6 @@ test-performance:
 .PHONY: Code Analysis
 code-analysis:  ## Code Analysis
 	bin/code-analysis
-	bin/black src/
 
 .PHONY: Build Docs
 docs:  ## Build Docs
