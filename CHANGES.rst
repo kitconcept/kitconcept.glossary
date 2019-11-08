@@ -7,6 +7,12 @@ Changelog
 - Show definition in list view with configurable truncation.
   [csenger]
 
+- Rename 'Term' to 'GlossaryTerm'.
+  [timo]
+
+- Add 'Glossary' type to displayed_types that show up in the navigation.
+  [timo]
+
 
 1.0.0a3 (2019-05-28)
 --------------------

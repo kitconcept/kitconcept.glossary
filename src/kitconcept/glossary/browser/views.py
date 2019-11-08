@@ -64,7 +64,7 @@ class GlossaryView(BrowserView):
                 for brain in api.content.find(
                     context=self.context,
                     depth=1,
-                    portal_type='Term',
+                    portal_type='GlossaryTerm',
                     letter=letter,
                     sort_limit=1,
                 )
@@ -97,13 +97,15 @@ class GlossaryView(BrowserView):
         common = {
             'context': self.context,
             'depth': 1,
-            'portal_type': 'Term',
+            'portal_type': 'GlossaryTerm',
         }
 
         if self.search_letter:
-            results = api.content.find(letter=self.search_letter.upper(), **common)
+            results = api.content.find(
+                letter=self.search_letter.upper(), **common)
         elif self.search_text:
-            results = api.content.find(SearchableText=self.search_text, **common)
+            results = api.content.find(
+                SearchableText=self.search_text, **common)
             # We redirect to the result if unique
             if len(results) == 1:
                 target = results[0].getURL()
@@ -120,13 +122,13 @@ class GlossaryView(BrowserView):
         """Truncate definition using tool properties"""
 
         max_length = api.portal.get_registry_record(
-                name='description_length',
-                interface=IGlossarySettings,
-                )
+            name='description_length',
+            interface=IGlossarySettings,
+        )
         ellipsis = api.portal.get_registry_record(
-                name='description_limiter',
-                interface=IGlossarySettings,
-                )
+            name='description_limiter',
+            interface=IGlossarySettings,
+        )
 
         text = safe_unicode(text).strip()
 

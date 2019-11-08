@@ -1,6 +1,6 @@
 
-  <link rel="stylesheet" tal:attributes="href string:${view/site_url}/++resource++kitconcept.glossary/glossary-38474be.css" />
+  <link rel="stylesheet" tal:attributes="href string:${view/site_url}/++resource++kitconcept.glossary/glossary-57e17ea.css" />
 
 
-  <script defer tal:attributes="src string:${view/site_url}/++resource++kitconcept.glossary/glossary-38474be.js"></script>
+  <script defer tal:attributes="src string:${view/site_url}/++resource++kitconcept.glossary/glossary-57e17ea.js"></script>
 

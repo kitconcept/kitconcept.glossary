@@ -41,18 +41,18 @@ class IGlossarySettings(Interface):
         title=_(u'Description length'),
         required=True,
         default=100,
-        )
+    )
 
     description_limiter = schema.TextLine(
         title=_(u'Description ellipsis'),
         required=True,
         default=u'…',
-        )
+    )
 
 
 class IGlossary(Interface):
 
-    """A Glossary is a container for Terms."""
+    """Container for GlossaryTerms."""
 
     text = RichText(
         title=_(u'Body text'),
@@ -60,12 +60,10 @@ class IGlossary(Interface):
     )
 
 
-class ITerm(Interface):
-
-    """A Term."""
+class IGlossaryTerm(Interface):
 
     title = schema.TextLine(
-        title=_(u'Term'),
+        title=_(u'Glossary Term'),
         required=True,
     )
 

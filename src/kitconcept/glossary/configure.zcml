@@ -7,6 +7,7 @@
   <five:registerPackage package="." />
   <i18n:registerTranslations directory="locales" />
 
+  <include package="plone.restapi" />
   <include package="plone.app.dexterity" />
 
   <permission
@@ -15,10 +16,11 @@
       />
 
   <permission
-      id="kitconcept.glossary.AddTerm"
-      title="kitconcept.glossary: Add Term"
+      id="kitconcept.glossary.AddGlossaryTerm"
+      title="kitconcept.glossary: Add Glossary Term"
       />
 
+  <include package=".api" />
   <include package=".browser" />
 
   <include file="profiles.zcml" />
@@ -28,11 +30,5 @@
   <adapter name="variants" factory=".indexers.variantsIndexer" />
   <adapter name="definition" factory=".indexers.definitionIndexer" />
   <adapter name="letter" factory=".indexers.letterIndexer" />
-
-  <adapter
-      for="* .interfaces.IGlossaryLayer"
-      name="kitconcept.glossary"
-      factory=".transform.GlossaryTransform"
-      />
 
 </configure>

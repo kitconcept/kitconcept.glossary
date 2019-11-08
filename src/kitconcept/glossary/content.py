@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from kitconcept.glossary.interfaces import IGlossary
-from kitconcept.glossary.interfaces import ITerm
+from kitconcept.glossary.interfaces import IGlossaryTerm
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
 from zope.interface import implementer
@@ -14,10 +14,8 @@ class Glossary(Container):
     """A Glossary is a container for Terms."""
 
 
-@implementer(ITerm)
-class Term(Item):
-
-    """A Term."""
+@implementer(IGlossaryTerm)
+class GlossaryTerm(Item):
 
     def Description(self):
         if not self.definition:

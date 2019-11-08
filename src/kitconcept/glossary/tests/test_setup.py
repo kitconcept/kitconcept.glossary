@@ -31,7 +31,7 @@ class InstallTestCase(unittest.TestCase):
         self.assertListEqual(roles, expected)
 
     def test_add_term_permission(self):
-        permission = 'kitconcept.glossary: Add Term'
+        permission = 'kitconcept.glossary: Add Glossary Term'
         roles = self.portal.rolesOfPermission(permission)
         roles = [r['name'] for r in roles if r['selected']]
         expected = ['Contributor', 'Manager', 'Owner', 'Site Administrator']
