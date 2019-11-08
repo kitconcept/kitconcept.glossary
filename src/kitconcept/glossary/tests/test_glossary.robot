@@ -36,7 +36,7 @@ Click Add Glossary
 Click Add Term
     Open Add New Menu
     Click Link  css=a#glossaryterm
-    Page Should Contain  Add Glossary Term
+    Page Should Contain  Add GlossaryTerm
 
 Create Glossary
     [arguments]  ${title}
