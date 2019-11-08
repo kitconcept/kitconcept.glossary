@@ -4,7 +4,11 @@ Changelog
 1.0.0a5 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Add Plone 5.2 support.
+  [timo]
+
+- Add Python 3 support.
+  [timo]
 
 
 1.0.0a4 (2019-11-08)

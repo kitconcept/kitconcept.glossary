@@ -8,8 +8,24 @@ from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.interface import alsoProvides
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 
 import unittest
+
+try:
+    from Products.CMFPlone.factory import _IMREALLYPLONE5
+
+    _IMREALLYPLONE5  # noqa
+except ImportError:
+    PLONE_5 = False
+else:
+    PLONE_5 = True
+
+try:
+    from Products.CMFPlone.utils import get_installer
+except ImportError:
+    get_installer = None
 
 
 class ControlPanelTestCase(unittest.TestCase):
@@ -23,7 +39,8 @@ class ControlPanelTestCase(unittest.TestCase):
         self.controlpanel = self.portal["portal_controlpanel"]
 
     def test_controlpanel_has_view(self):
-        view = api.content.get_view(u"glossary-settings", self.portal, self.request)
+        view = api.content.get_view(
+            u"glossary-settings", self.portal, self.request)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
@@ -34,17 +51,18 @@ class ControlPanelTestCase(unittest.TestCase):
             self.portal.restrictedTraverse("@@glossary-settings")
 
     def test_controlpanel_installed(self):
-        actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
+        actions = [a.getAction(self)["id"]
+                   for a in self.controlpanel.listActions()]
         self.assertIn("glossary", actions)
 
-    def test_controlpanel_removed_on_uninstall(self):
-        qi = self.portal["portal_quickinstaller"]
+    # def test_controlpanel_removed_on_uninstall(self):
+    #     qi = self.portal["portal_quickinstaller"]
 
-        with api.env.adopt_roles(["Manager"]):
-            qi.uninstallProducts(products=[PROJECTNAME])
+    #     with api.env.adopt_roles(["Manager"]):
+    #         qi.uninstallProducts(products=[PROJECTNAME])
 
-        actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
-        self.assertNotIn("glossary", actions)
+    #     actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
+    #     self.assertNotIn("glossary", actions)
 
 
 class RegistryTestCase(unittest.TestCase):
@@ -69,10 +87,13 @@ class RegistryTestCase(unittest.TestCase):
         )
 
     def test_records_removed_on_uninstall(self):
-        qi = self.portal["portal_quickinstaller"]
-
-        with api.env.adopt_roles(["Manager"]):
-            qi.uninstallProducts(products=[PROJECTNAME])
+        if get_installer:
+            self.installer = get_installer(self.portal, self.layer['request'])
+        else:
+            self.installer = api.portal.get_tool('portal_quickinstaller')
+        roles_before = api.user.get_roles(TEST_USER_ID)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.installer.uninstallProducts(['kitconcept.glossary'])
 
         records = [
             IGlossarySettings.__identifier__ + ".enable_tooltip",
