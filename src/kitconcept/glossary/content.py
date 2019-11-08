@@ -16,11 +16,9 @@ class Glossary(Container):
 
 @implementer(IGlossaryTerm)
 class GlossaryTerm(Item):
-
     def Description(self):
         if not self.definition:
-            return ''
-        tree = lxml.html.fromstring(u'<div>%s</div>' %
-                                    self.definition.output)
+            return ""
+        tree = lxml.html.fromstring(u"<div>%s</div>" % self.definition.output)
         text = tree.text_content()
         return text

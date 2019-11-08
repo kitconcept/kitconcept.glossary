@@ -15,10 +15,15 @@ from kitconcept.glossary.interfaces import IGlossarySettings
 BATCH_SIZE = 30
 
 
+def cmp(a, b):
+    # cmp does not exist in py3 so we define it here
+    return (a > b) - (a < b)
+
+
 def _catalog_counter_cachekey(method, self):
     """Return a cachekey based on catalog updates."""
 
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     return str(catalog.getCounter())
 
 
@@ -30,9 +35,9 @@ class TermView(BrowserView):
         """Get term in the desired format"""
 
         item = {
-            'term': self.context.title,
-            'variants': self.context.variants,
-            'definition': self.context.definition.raw,
+            "term": self.context.title,
+            "variants": self.context.variants,
+            "definition": self.context.definition.raw,
         }
         return item
 
@@ -43,9 +48,9 @@ class GlossaryView(BrowserView):
 
     def __init__(self, context, request):
         super(GlossaryView, self).__init__(context, request)
-        self.search_letter = request.get('search_letter', '')
-        self.search_text = request.get('search_text')
-        self.batch_start = request.get('b_start', 0)
+        self.search_letter = request.get("search_letter", "")
+        self.search_text = request.get("search_text")
+        self.batch_start = request.get("b_start", 0)
         self.uid = context.UID()
 
     def title(self):
@@ -59,22 +64,25 @@ class GlossaryView(BrowserView):
         out = []
         glossary_url = self.context.absolute_url()
         for letter in tuple(string.ascii_uppercase):
-            exists = any([
-                brain.letter
-                for brain in api.content.find(
-                    context=self.context,
-                    depth=1,
-                    portal_type='GlossaryTerm',
-                    letter=letter,
-                    sort_limit=1,
-                )
-            ])
+            exists = any(
+                [
+                    brain.letter
+                    for brain in api.content.find(
+                        context=self.context,
+                        depth=1,
+                        portal_type="GlossaryTerm",
+                        letter=letter,
+                        sort_limit=1,
+                    )
+                ]
+            )
             letter_map = {
-                'glyph': letter,
-                'has_no_term': not exists,
-                'zoom_link': glossary_url + '?search_letter=' + letter.lower(),
-                'css_class': (letter.lower() == self.search_letter.lower() and
-                              'selected' or None),
+                "glyph": letter,
+                "has_no_term": not exists,
+                "zoom_link": glossary_url + "?search_letter=" + letter.lower(),
+                "css_class": (
+                    letter.lower() == self.search_letter.lower() and "selected" or None
+                ),
             }
             out.append(letter_map)
         return out
@@ -95,9 +103,10 @@ class GlossaryView(BrowserView):
     def _list_results(self):
         """Terms list (brains) depending on the request"""
         common = {
-            'context': self.context,
-            'depth': 1,
-            'portal_type': 'GlossaryTerm',
+
+            "context": self.context,
+            "depth": 1,
+            "portal_type": "GlossaryTerm",
         }
 
         if self.search_letter:
@@ -114,20 +123,18 @@ class GlossaryView(BrowserView):
             # Viewing all terms
             results = api.content.find(**common)
         results = list(results)
-        results.sort(lambda x, y: cmp(baseNormalize(x.Title),
-                                      baseNormalize(y.Title)))
+        results.sort(lambda x, y: cmp(
+            baseNormalize(x.Title), baseNormalize(y.Title)))
         return tuple(results)
 
     def truncateDescription(self, text):
         """Truncate definition using tool properties"""
 
         max_length = api.portal.get_registry_record(
-            name='description_length',
-            interface=IGlossarySettings,
+            name="description_length", interface=IGlossarySettings,
         )
         ellipsis = api.portal.get_registry_record(
-            name='description_limiter',
-            interface=IGlossarySettings,
+            name="description_limiter", interface=IGlossarySettings,
         )
 
         text = safe_unicode(text).strip()
@@ -135,9 +142,9 @@ class GlossaryView(BrowserView):
         if max_length > 0 and len(text) > max_length:
             text = text[:max_length]
             text = text.strip()
-            text = u'{0}{1}'.format(text, ellipsis)
+            text = u"{0}{1}".format(text, ellipsis)
 
-        text = text.encode('utf-8', 'replace')
+        text = text.encode("utf-8", "replace")
 
         return text
 
@@ -146,9 +153,9 @@ class GlossaryView(BrowserView):
 
         description = self.truncateDescription(result.Description)
         return {
-            'url': result.getURL(),
-            'title': result.Title or result.getId,
-            'description': description.replace('\n', '<br />'),
+            "url": result.getURL(),
+            "title": result.Title or result.getId,
+            "description": description.replace("\n", "<br />"),
         }
 
 

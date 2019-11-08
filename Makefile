@@ -82,6 +82,7 @@ test-performance:
 .PHONY: Code Analysis
 code-analysis:  ## Code Analysis
 	bin/code-analysis
+	if [ -f "bin/black" ]; then bin/black src/ --check ; fi
 
 .PHONY: Build Docs
 docs:  ## Build Docs
