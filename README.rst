@@ -11,9 +11,6 @@ kitconcept.glossary
 .. image:: https://img.shields.io/travis/kitconcept/kitconcept.glossary/master.svg
     :target: http://travis-ci.org/kitconcept/kitconcept.glossary
 
-.. image:: https://img.shields.io/coveralls/kitconcept/kitconcept.glossary/master.svg
-    :target: https://coveralls.io/r/kitconcept/kitconcept.glossary
-
 |
 
 .. image:: https://raw.githubusercontent.com/kitconcept/kitconcept.glossary/master/kitconcept.png
