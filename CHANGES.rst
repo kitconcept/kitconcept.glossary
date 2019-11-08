@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0a4 (unreleased)
+1.0.0a4 (2019-11-08)
 --------------------
 
 - Use Portal Transforms transformation to generate glossary entries.
