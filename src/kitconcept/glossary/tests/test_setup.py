@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from kitconcept.glossary.config import PROJECTNAME
 from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone.browserlayer.utils import registered_layers
 from plone.app.testing import setRoles
@@ -33,7 +32,6 @@ class InstallTestCase(unittest.TestCase):
             self.installer = get_installer(self.portal, self.layer['request'])
         else:
             self.installer = api.portal.get_tool('portal_quickinstaller')
-        roles_before = api.user.get_roles(TEST_USER_ID)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.installer.installProducts(['kitconcept.glossary'])
 

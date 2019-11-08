@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from kitconcept.glossary.config import PROJECTNAME
 from kitconcept.glossary.controlpanel import IGlossarySettings
 from kitconcept.glossary.interfaces import IGlossaryLayer
 from kitconcept.glossary.testing import INTEGRATION_TESTING
@@ -91,7 +90,7 @@ class RegistryTestCase(unittest.TestCase):
             self.installer = get_installer(self.portal, self.layer['request'])
         else:
             self.installer = api.portal.get_tool('portal_quickinstaller')
-        roles_before = api.user.get_roles(TEST_USER_ID)
+
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.installer.uninstallProducts(['kitconcept.glossary'])
 
