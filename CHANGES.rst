@@ -4,8 +4,8 @@ Changelog
 1.0.0a6 (unreleased)
 --------------------
 
-- Nothing changed yet.
-
+- Update German translations.
+  [timo]
 
 1.0.0a5 (2019-11-08)
 --------------------
