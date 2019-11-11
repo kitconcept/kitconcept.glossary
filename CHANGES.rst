@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0a6 (unreleased)
+1.0.0a6 (2019-11-11)
 --------------------
 
 - Update German translations.
