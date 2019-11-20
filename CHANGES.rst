@@ -4,7 +4,8 @@ Changelog
 1.0.0a7 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Fix German translation for Glossary description.
+  [timo]
 
 
 1.0.0a6 (2019-11-11)
