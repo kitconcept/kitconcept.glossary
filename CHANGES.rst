@@ -1,11 +1,22 @@
 Changelog
 =========
 
+
 1.0.0a7 (unreleased)
 --------------------
 
+- Don't run the highlighter on edit forms as it will remove the term
+  text from form fields.
+  [csenger]
+
+- Fix the templates to run in that don't have ATContentTypes.
+  [csenger]
+
+- Use an unminified build with debug output for now.
+  [csenger]
+
 - Fix German translation for Glossary description.
-  [timo]
+  [timo, csenger]
 
 
 1.0.0a6 (2019-11-11)
