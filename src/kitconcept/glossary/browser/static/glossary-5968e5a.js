@@ -147,6 +147,11 @@ $(function () {
       });
       console.log(enabledTypes);
 
+      // The GlossaryMarker code removes marker text from edit forms
+      if ($(".template-edit").length > 0) {
+        return;
+      }
+
       if (!data.settings.enabled || enabledTypes.indexOf(portalType) === -1) {
         console.log('not enabled (globally or for this type)');
         return;
