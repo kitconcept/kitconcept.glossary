@@ -18,7 +18,7 @@ msgstr ""
 
 #: kitconcept/glossary/profiles.zcml:15
 msgid "A Dexterity-based content type to define a glossary and its terms."
-msgstr "Dexterity-basierter Inhaltstype und ein Glossar zu definieren."
+msgstr "Dexterity-basierter Inhaltstyp, um ein Glossar zu definieren."
 
 #: kitconcept/glossary/interfaces.py:50
 msgid "Body text"
@@ -26,7 +26,7 @@ msgstr "Text"
 
 #: kitconcept/glossary/interfaces.py:42
 msgid "Description ellipsis"
-msgstr "Beschreibung"
+msgstr "Auslassungszeichen Beschreibung"
 
 #: kitconcept/glossary/interfaces.py:38
 msgid "Description length"
