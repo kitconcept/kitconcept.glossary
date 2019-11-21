@@ -12,10 +12,7 @@
 
   <body>
     <metal:main fill-slot="main">
-      <tal:main-macro metal:define-macro="main"
-                      tal:define="kssClassesView context/@@kss_field_decorator_view;
-                                  getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                                  kss_generic_macros here/kss_generic_macros/macros">
+      <tal:main-macro metal:define-macro="main">
         <div id="glossary"
              tal:define="uid here/UID;
                          search_letter request/search_letter | nothing;
@@ -23,13 +20,13 @@
 
           <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-          <h1 metal:use-macro="kss_generic_macros/generic_title_view">
+          <h1>
             Title or id
           </h1>
 
           <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-          <p metal:use-macro="kss_generic_macros/generic_description_view">
+          <p>
             Description
           </p>
 
