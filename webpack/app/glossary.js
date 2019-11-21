@@ -27,6 +27,7 @@ $(() => {
         enabledTypes.push(name.toLowerCase().replace(' ', '-'));
       });
       console.log(enabledTypes);
+
       if (!data.settings.enabled ||
           enabledTypes.indexOf(portalType) === -1) {
         console.log('not enabled (globally or for this type)');

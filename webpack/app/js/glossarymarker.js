@@ -76,6 +76,8 @@ export default class GlossaryMarker {
     }
     var content_value = node.nodeValue;
     var lcontent_value = content_value.toLowerCase();
+    console.log('============================================================');
+    console.log(lcontent_value);
     var word_bounds = new Array();
     /* Write multiple regexps to replace one because it doesn't work
      * on IE: '\\b' + lword + '\\b'
@@ -95,6 +97,8 @@ export default class GlossaryMarker {
     // Check each regexps
     for (var i = 0; i < word_bounds.length; i++) {
       index = lcontent_value.search(word_bounds[i]);
+      console.log(word_bounds[i]);
+      console.log(index);
       if (index != -1) {
         if (i == 2 || i == 3) {
           // Position of search is one character before the real
@@ -105,8 +109,10 @@ export default class GlossaryMarker {
       }
     }
     if (index == -1) {
+      console.log('======== not found =========');
       return;
     }
+    console.log('======== found =========');
 
     // Word is found
     var last_index = index + word.length;
