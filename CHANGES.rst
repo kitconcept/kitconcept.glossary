@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a7 (unreleased)
+1.0.0a7 (2019-11-22)
 --------------------
 
 - Don't run the highlighter on edit forms as it will remove the term
