@@ -5,7 +5,8 @@ Changelog
 1.0.0a9 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Make sure the indexed description is unicode, not ElementUnicodeResult
+  [csenger]
 
 
 1.0.0a8 (2019-12-06)
