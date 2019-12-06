@@ -5,7 +5,8 @@ Changelog
 1.0.0a8 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Fix Glossary title and description.
+  [timo]
 
 
 1.0.0a7 (2019-11-22)

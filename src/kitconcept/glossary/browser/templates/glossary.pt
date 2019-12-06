@@ -20,15 +20,11 @@
 
           <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-          <h1>
-            Title or id
-          </h1>
+          <h1 class="documentFirstHeading" tal:content="context/title">GlossaryTerm</h1>
 
           <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-          <p>
-            Description
-          </p>
+          <div class="documentDescription" tal:content="structure context/description">Description</div>
 
           <div tal:replace="structure provider:plone.abovecontentbody" />
 

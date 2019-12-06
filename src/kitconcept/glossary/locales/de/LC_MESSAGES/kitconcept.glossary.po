@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-11-11 12:53+0000\n"
+"POT-Creation-Date: 2019-12-06 07:50+0000\n"
 "PO-Revision-Date: 2019-06-17 09:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -70,7 +70,7 @@ msgstr "Glossareintrag"
 msgid "Only objects of these content types will display glossary terms."
 msgstr "Nur Inhalte dieses Inhaltstyps zeigen Glossareinträge an."
 
-#: kitconcept/glossary/browser/templates/glossary.pt:58
+#: kitconcept/glossary/browser/templates/glossary.pt:51
 msgid "Search"
 msgstr "Suche"
 
@@ -109,6 +109,6 @@ msgid "label_exclude_from_nav"
 msgstr "Von der Navigation ausschließen"
 
 #. Default: "Search"
-#: kitconcept/glossary/browser/templates/glossary.pt:53
+#: kitconcept/glossary/browser/templates/glossary.pt:46
 msgid "label_text_search"
 msgstr "Suchen"
