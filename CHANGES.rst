@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a9 (unreleased)
+1.0.0a9 (2019-12-06)
 --------------------
 
 - Make sure the indexed description is unicode, not ElementUnicodeResult
