@@ -5,7 +5,8 @@ Changelog
 1.0.0a10 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- Recompile mo files in buildout.
+  [csenger]
 
 
 1.0.0a9 (2019-12-06)
