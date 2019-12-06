@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a10 (unreleased)
+1.0.0a10 (2019-12-06)
 ---------------------
 
 - Recompile mo files in buildout.
