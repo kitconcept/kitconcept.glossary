@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a11 (unreleased)
+1.0.0a11 (2020-02-04)
 ---------------------
 
 - Show all variants in glossary view.
