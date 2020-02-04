@@ -5,7 +5,11 @@ Changelog
 1.0.0a11 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- Show all variants in glossary view.
+  [csenger]
+
+- Remove description from glossary view.
+  [csenger]
 
 
 1.0.0a10 (2019-12-06)
@@ -18,7 +22,7 @@ Changelog
 1.0.0a9 (2019-12-06)
 --------------------
 
-- Make sure the indexed description is unicode, not ElementUnicodeResult
+- Make sure the indexed description is unicode, not ElementUnicodeResult.
   [csenger]
 
 
