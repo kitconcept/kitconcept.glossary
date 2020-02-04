@@ -92,7 +92,7 @@
                                           tal:content="result/title" />
                   </dt>
 
-                  <dd tal:content="structure result/description" />
+                  <!-- <dd tal:content="structure result/description" /> -->
 
                 </tal:entry>
 
