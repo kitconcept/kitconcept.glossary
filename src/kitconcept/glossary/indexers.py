@@ -34,9 +34,8 @@ def textIndexer(context):
 
 @indexer(IGlossaryTerm)
 def variantsIndexer(context):
-    if not context.variants:
-        return []
-    return context.variants
+    variants = context.variants or []
+    return [context.title] + list(variants)
 
 
 @indexer(IGlossaryTerm)
@@ -46,6 +45,11 @@ def definitionIndexer(context):
 
 @indexer(IGlossaryTerm)
 def letterIndexer(context):
-    if not context.title:
-        return u""
-    return baseNormalize(context.title)[0].upper()
+    terms = []
+    if context.title:
+        terms.append(context.title)
+    if context.variants:
+        terms.extend(list(context.variants))
+    normalized = [baseNormalize(term)[0].upper() for term in terms if term]
+    normalized = list(set(normalized))
+    return normalized

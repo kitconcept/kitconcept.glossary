@@ -2,8 +2,8 @@
 <object name="portal_catalog">
     <column value="variants"/>
     <column value="definition"/>
-    <column value="letter"/>
-    <index name="letter" meta_type="FieldIndex">
+    <column value="letter" />
+    <index name="letter" meta_type="KeywordIndex">
         <indexed_attr value="letter"/>
     </index>
 </object>

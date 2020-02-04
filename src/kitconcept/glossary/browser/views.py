@@ -102,6 +102,11 @@ class GlossaryView(BrowserView):
     @memoize
     def _list_results(self):
         """Terms list (brains) depending on the request"""
+
+        search_letter = self.search_letter
+        if search_letter:
+            search_letter = search_letter.upper()
+
         common = {
 
             "context": self.context,
@@ -111,7 +116,7 @@ class GlossaryView(BrowserView):
 
         if self.search_letter:
             results = api.content.find(
-                letter=self.search_letter.upper(), **common)
+                letter=search_letter, **common)
         elif self.search_text:
             results = api.content.find(
                 SearchableText=self.search_text, **common)
@@ -123,9 +128,20 @@ class GlossaryView(BrowserView):
             # Viewing all terms
             results = api.content.find(**common)
         results = list(results)
-        results.sort(lambda x, y: cmp(
-            baseNormalize(x.Title), baseNormalize(y.Title)))
-        return tuple(results)
+        variant_results = []
+        # create a list of tuples with the sort key as the first item
+        for brain in results:
+            for variant in brain['variants']:
+                sortable_variant = baseNormalize(variant.upper())
+                if search_letter and sortable_variant[0] != search_letter:
+                    continue
+                variant_results.append((sortable_variant,
+                                        {
+                                            "title": variant,
+                                            "brain": brain
+                                        }))
+        variant_results = sorted(variant_results, key=lambda r: r[0])
+        return tuple([r[1] for r in variant_results])
 
     def truncateDescription(self, text):
         """Truncate definition using tool properties"""
@@ -151,10 +167,10 @@ class GlossaryView(BrowserView):
     def result_features(self, result):
         """TAL friendly properties of each feature"""
 
-        description = self.truncateDescription(result.Description)
+        description = self.truncateDescription(result['brain'].Description)
         return {
-            "url": result.getURL(),
-            "title": result.Title or result.getId,
+            "url": result['brain'].getURL(),
+            "title": result['title'] or result['brain'].getId,
             "description": description.replace("\n", "<br />"),
         }
 
