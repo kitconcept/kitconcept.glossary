@@ -8,8 +8,10 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
 from zExceptions import Redirect
 
+import itertools
 import string
 
+from kitconcept.glossary import _
 from kitconcept.glossary.interfaces import IGlossarySettings
 
 BATCH_SIZE = 30
@@ -61,8 +63,12 @@ class GlossaryView(BrowserView):
     def first_letters(self):
         """Users with non latin chars (cyrillic, arabic, ...) should override
         this with a better suited dataset."""
-        out = []
         glossary_url = self.context.absolute_url()
+        out = [{"glyph": _("All"),
+                "has_no_term": False,
+                "zoom_link": glossary_url,
+                "css_class": not self.search_letter and "selected" or None,
+                }]
         for letter in tuple(string.ascii_uppercase):
             exists = any(
                 [
@@ -138,10 +144,19 @@ class GlossaryView(BrowserView):
                 variant_results.append((sortable_variant,
                                         {
                                             "title": variant,
-                                            "brain": brain
+                                            "brain": brain,
+                                            "letter": sortable_variant[0],
                                         }))
         variant_results = sorted(variant_results, key=lambda r: r[0])
         return tuple([r[1] for r in variant_results])
+
+    def group_results_by_letter(self, results):
+        grouped_results = itertools.groupby(results,
+                                            lambda r: r['letter'])
+        results = [{'letter': key, 'results': list(values)}
+                   for (key, values)
+                   in grouped_results]
+        return results
 
     def truncateDescription(self, text):
         """Truncate definition using tool properties"""
@@ -172,6 +187,7 @@ class GlossaryView(BrowserView):
             "url": result['brain'].getURL(),
             "title": result['title'] or result['brain'].getId,
             "description": description.replace("\n", "<br />"),
+            "letter": result['letter'],
         }
 
 

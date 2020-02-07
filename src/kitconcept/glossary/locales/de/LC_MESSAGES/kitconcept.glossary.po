@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-12-06 07:50+0000\n"
+"POT-Creation-Date: 2020-02-07 16:15+0000\n"
 "PO-Revision-Date: 2019-06-17 09:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,6 +19,10 @@ msgstr ""
 #: kitconcept/glossary/profiles.zcml:15
 msgid "A Dexterity-based content type to define a glossary and its terms."
 msgstr "Dexterity-basierter Inhaltstyp, um ein Glossar zu definieren."
+
+#: kitconcept/glossary/browser/views.py:67
+msgid "All"
+msgstr "Alle"
 
 #: kitconcept/glossary/interfaces.py:50
 msgid "Body text"
@@ -70,7 +74,7 @@ msgstr "Glossareintrag"
 msgid "Only objects of these content types will display glossary terms."
 msgstr "Nur Inhalte dieses Inhaltstyps zeigen Glossareinträge an."
 
-#: kitconcept/glossary/browser/templates/glossary.pt:51
+#: kitconcept/glossary/browser/templates/glossary.pt:52
 msgid "Search"
 msgstr "Suche"
 
@@ -109,6 +113,6 @@ msgid "label_exclude_from_nav"
 msgstr "Von der Navigation ausschließen"
 
 #. Default: "Search"
-#: kitconcept/glossary/browser/templates/glossary.pt:46
+#: kitconcept/glossary/browser/templates/glossary.pt:47
 msgid "label_text_search"
 msgstr "Suchen"
