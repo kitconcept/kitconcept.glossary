@@ -5,7 +5,8 @@ Changelog
 1.0.0a12 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- Add letter subheadings and "All" link to glossary list.
+  [csenger]
 
 
 1.0.0a11 (2020-02-04)

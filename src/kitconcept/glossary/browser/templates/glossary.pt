@@ -77,26 +77,33 @@
                           condition="view/has_results">
             <div metal:use-macro="here/batch_macros/macros/navigation" />
             <dl tal:define="result_features nocall:view/result_features">
-              <tal:loop repeat="result batch">
-                <tal:entry define="result python:result_features(result);
-                                   url result/url">
-                  <dt>
-                    <a href="#"
-                       tal:attributes="href url">
-                      <img tal:attributes="src string:${context/portal_url}/++resource++kitconcept.glossary/img/ploneglossarydefinition_icon.png"
-                           height="16"
-                           width="16"
-                           alt=""
-                           /></a>&nbsp;<a href="#"
-                                          tal:attributes="href url"
-                                          tal:content="result/title" />
-                  </dt>
+              <tal:letters repeat="letter_results python:view.group_results_by_letter(batch)">
+                <h2 tal:content="letter_results/letter"
+                    tal:condition="not:search_letter">
+                    A
+                </h2>
+                
+                <tal:loop repeat="result letter_results/results">
+                  <tal:entry define="result python:result_features(result);
+                                     url result/url">
+                    <dt>
+                      <a href="#"
+                         tal:attributes="href url">
+                        <img tal:attributes="src string:${context/portal_url}/++resource++kitconcept.glossary/img/ploneglossarydefinition_icon.png"
+                             height="16"
+                             width="16"
+                             alt=""
+                             /></a>&nbsp;<a href="#"
+                                            tal:attributes="href url"
+                                            tal:content="result/title" />
+                    </dt>
 
                   <!-- <dd tal:content="structure result/description" /> -->
 
                 </tal:entry>
 
               </tal:loop>
+              </tal:letters>
             </dl>
 
           </tal:if-results>
