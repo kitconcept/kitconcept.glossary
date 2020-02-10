@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a12 (unreleased)
+1.0.0a12 (2020-02-10)
 ---------------------
 
 - Add letter subheadings and "All" link to glossary list.
