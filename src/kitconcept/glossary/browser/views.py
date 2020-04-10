@@ -6,7 +6,6 @@ from plone.memoize.instance import memoize
 from Products.CMFPlone.PloneBatch import Batch
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
-from six import PY2
 from zExceptions import Redirect
 
 import itertools
@@ -176,8 +175,7 @@ class GlossaryView(BrowserView):
             text = text.strip()
             text = u"{0}{1}".format(text, ellipsis)
 
-        if PY2:
-            text = text.encode("utf-8", "replace")
+        text = text.encode("utf-8", "replace")
 
         return text
 
