@@ -1,5 +1,7 @@
 language: python
-python: "2.7"
+python:
+  - "2.7"
+  - "3.7"
 sudo: required
 cache:
   pip: true
@@ -10,8 +12,17 @@ addons:
 env:
   matrix:
     - PLONE_VERSION=4.3.x
+    - PLONE_VERSION=5.0.x
     - PLONE_VERSION=5.1.x
     - PLONE_VERSION=5.2.x
+jobs:
+  exclude:
+    - python: "3.7"
+      env: PLONE_VERSION=4.3.x
+    - python: "3.7"
+      env: PLONE_VERSION=5.0.x
+    - python: "3.7"
+      env: PLONE_VERSION=5.1.x
 before_install:
   - mkdir -p $HOME/buildout-cache/{eggs,downloads}
   - mkdir $HOME/.buildout
