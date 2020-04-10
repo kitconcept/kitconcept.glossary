@@ -68,3 +68,9 @@ class GlossaryViewTestCase(BaseViewTestCase):
     def setUp(self):
         super(GlossaryViewTestCase, self).setUp()
         self.view = api.content.get_view(u"view", self.g1, self.request)
+
+    def test_view(self):
+        try:
+            self.view()
+        except TypeError:
+            self.fail("Glossary view raised TypeError unexpectedly!")
