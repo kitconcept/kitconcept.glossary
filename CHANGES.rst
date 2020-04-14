@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0a13 (unreleased)
+1.0.0a13 (2020-04-14)
 ---------------------
 
 - Fix exception when process description field in the view for Python 3.
