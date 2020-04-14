@@ -3,6 +3,7 @@ from kitconcept.glossary.testing import INTEGRATION_TESTING
 from plone import api
 from plone.app.textfield.value import RichTextValue
 
+import string
 import unittest
 
 
@@ -70,7 +71,8 @@ class GlossaryViewTestCase(BaseViewTestCase):
         self.view = api.content.get_view(u"view", self.g1, self.request)
 
     def test_view(self):
-        try:
-            self.view()
-        except TypeError:
-            self.fail("Glossary view raised TypeError unexpectedly!")
+        html = self.view()
+        self.assertIn('All', html)
+        self.assertIn('[0-9]', html)
+        for letter in string.ascii_uppercase:
+            self.assertIn(letter, html)

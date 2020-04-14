@@ -70,6 +70,29 @@ class GlossaryView(BrowserView):
                 "zoom_link": glossary_url,
                 "css_class": not self.search_letter and "selected" or None,
                 }]
+
+        exists = any(
+            [
+                brain.letter
+                for brain in api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type="GlossaryTerm",
+                    letter=tuple(string.digits),
+                    sort_limit=1,
+                )
+            ]
+        )
+        letter_map = {
+            "glyph": _("[0-9]"),
+            "has_no_term": not exists,
+            "zoom_link": glossary_url + "?search_letter=[0-9]",
+            "css_class": (
+                "[0-9]" == self.search_letter and "selected" or None
+            ),
+        }
+        out.append(letter_map)
+
         for letter in tuple(string.ascii_uppercase):
             exists = any(
                 [
@@ -114,6 +137,9 @@ class GlossaryView(BrowserView):
         if search_letter:
             search_letter = search_letter.upper()
 
+        if search_letter == '[0-9]':
+            search_letter = tuple(string.digits)
+
         common = {
 
             "context": self.context,
@@ -121,7 +147,7 @@ class GlossaryView(BrowserView):
             "portal_type": "GlossaryTerm",
         }
 
-        if self.search_letter:
+        if search_letter:
             results = api.content.find(
                 letter=search_letter, **common)
         elif self.search_text:
@@ -140,7 +166,13 @@ class GlossaryView(BrowserView):
         for brain in results:
             for variant in brain['variants']:
                 sortable_variant = baseNormalize(variant.upper())
-                if search_letter and sortable_variant[0] != search_letter:
+                if search_letter \
+                   and isinstance(search_letter, str) \
+                   and sortable_variant[0] != search_letter:
+                    continue
+                if search_letter \
+                   and isinstance(search_letter, tuple) \
+                   and sortable_variant[0] not in search_letter:
                     continue
                 variant_results.append((sortable_variant,
                                         {
