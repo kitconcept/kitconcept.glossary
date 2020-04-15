@@ -5,7 +5,8 @@ Changelog
 1.0.0a14 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- Re-release 1.0.0a13 as final.
+  [timo]
 
 
 1.0.0a13 (2020-04-14)
