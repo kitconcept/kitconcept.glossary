@@ -5,7 +5,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Don't purge behaviors
+  [csenger]
 
 
 1.0.0 (2020-04-15)
