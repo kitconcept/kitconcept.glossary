@@ -21,7 +21,7 @@
   <property name="add_permission">kitconcept.glossary.AddGlossaryTerm</property>
 
   <!-- enabled behaviors -->
-  <property name="behaviors">
+  <property name="behaviors" purge="False">
     <element value="plone.app.content.interfaces.INameFromTitle" />
   </property>
 

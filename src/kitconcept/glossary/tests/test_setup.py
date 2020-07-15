@@ -40,7 +40,7 @@ class InstallTestCase(unittest.TestCase):
             'kitconcept.glossary'))
 
     def test_addon_layer(self):
-        layers = [l.getName() for l in registered_layers()]
+        layers = [layer.getName() for layer in registered_layers()]
         self.assertIn("IGlossaryLayer", layers)
 
     def test_add_glossary_permission(self):

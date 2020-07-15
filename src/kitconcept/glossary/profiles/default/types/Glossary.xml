@@ -23,7 +23,7 @@
   <property name="add_permission">kitconcept.glossary.AddGlossary</property>
 
   <!-- enabled behaviors -->
-  <property name="behaviors">
+  <property name="behaviors" purge="False">
     <element value="plone.app.content.interfaces.INameFromTitle" />
     <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
   </property>
