@@ -72,7 +72,7 @@ class GlossaryViewTestCase(BaseViewTestCase):
 
     def test_view(self):
         html = self.view()
-        self.assertIn('All', html)
-        self.assertIn('[0-9]', html)
+        self.assertIn("All", html)
+        self.assertIn("[0-9]", html)
         for letter in string.ascii_uppercase:
             self.assertIn(letter, html)

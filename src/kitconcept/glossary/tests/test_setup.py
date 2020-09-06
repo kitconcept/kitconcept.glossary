@@ -27,17 +27,16 @@ class InstallTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         if get_installer:
-            self.installer = get_installer(self.portal, self.layer['request'])
+            self.installer = get_installer(self.portal, self.layer["request"])
         else:
-            self.installer = api.portal.get_tool('portal_quickinstaller')
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer.installProducts(['kitconcept.glossary'])
+            self.installer = api.portal.get_tool("portal_quickinstaller")
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.installer.installProducts(["kitconcept.glossary"])
 
     def test_product_installed(self):
-        self.assertTrue(self.installer.isProductInstalled(
-            'kitconcept.glossary'))
+        self.assertTrue(self.installer.isProductInstalled("kitconcept.glossary"))
 
     def test_addon_layer(self):
         layers = [layer.getName() for layer in registered_layers()]
@@ -63,20 +62,18 @@ class UninstallTestCase(unittest.TestCase):
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         if get_installer:
-            self.installer = get_installer(self.portal, self.layer['request'])
+            self.installer = get_installer(self.portal, self.layer["request"])
         else:
-            self.installer = api.portal.get_tool('portal_quickinstaller')
+            self.installer = api.portal.get_tool("portal_quickinstaller")
         roles_before = api.user.get_roles(TEST_USER_ID)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer.uninstallProducts(['kitconcept.glossary'])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.installer.uninstallProducts(["kitconcept.glossary"])
         setRoles(self.portal, TEST_USER_ID, roles_before)
 
     def test_product_uninstalled(self):
-        self.assertFalse(
-            self.installer.isProductInstalled('kitconcept.glossary')
-        )
+        self.assertFalse(self.installer.isProductInstalled("kitconcept.glossary"))
 
     # def test_browserlayer_removed(self):
     #     from kitconcept.glossary.interfaces import IGlossaryLayer

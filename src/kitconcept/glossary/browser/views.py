@@ -65,11 +65,14 @@ class GlossaryView(BrowserView):
         """Users with non latin chars (cyrillic, arabic, ...) should override
         this with a better suited dataset."""
         glossary_url = self.context.absolute_url()
-        out = [{"glyph": _("All"),
+        out = [
+            {
+                "glyph": _("All"),
                 "has_no_term": False,
                 "zoom_link": glossary_url,
                 "css_class": not self.search_letter and "selected" or None,
-                }]
+            }
+        ]
 
         exists = any(
             [
@@ -87,9 +90,7 @@ class GlossaryView(BrowserView):
             "glyph": _("[0-9]"),
             "has_no_term": not exists,
             "zoom_link": glossary_url + "?search_letter=[0-9]",
-            "css_class": (
-                "[0-9]" == self.search_letter and "selected" or None
-            ),
+            "css_class": ("[0-9]" == self.search_letter and "selected" or None),
         }
         out.append(letter_map)
 
@@ -137,22 +138,19 @@ class GlossaryView(BrowserView):
         if search_letter:
             search_letter = search_letter.upper()
 
-        if search_letter == '[0-9]':
+        if search_letter == "[0-9]":
             search_letter = tuple(string.digits)
 
         common = {
-
             "context": self.context,
             "depth": 1,
             "portal_type": "GlossaryTerm",
         }
 
         if search_letter:
-            results = api.content.find(
-                letter=search_letter, **common)
+            results = api.content.find(letter=search_letter, **common)
         elif self.search_text:
-            results = api.content.find(
-                SearchableText=self.search_text, **common)
+            results = api.content.find(SearchableText=self.search_text, **common)
             # We redirect to the result if unique
             if len(results) == 1:
                 target = results[0].getURL()
@@ -164,41 +162,51 @@ class GlossaryView(BrowserView):
         variant_results = []
         # create a list of tuples with the sort key as the first item
         for brain in results:
-            for variant in brain['variants']:
+            for variant in brain["variants"]:
                 sortable_variant = baseNormalize(variant.upper())
-                if search_letter \
-                   and isinstance(search_letter, str) \
-                   and sortable_variant[0] != search_letter:
+                if (
+                    search_letter
+                    and isinstance(search_letter, str)
+                    and sortable_variant[0] != search_letter
+                ):
                     continue
-                if search_letter \
-                   and isinstance(search_letter, tuple) \
-                   and sortable_variant[0] not in search_letter:
+                if (
+                    search_letter
+                    and isinstance(search_letter, tuple)
+                    and sortable_variant[0] not in search_letter
+                ):
                     continue
-                variant_results.append((sortable_variant,
-                                        {
-                                            "title": variant,
-                                            "brain": brain,
-                                            "letter": sortable_variant[0],
-                                        }))
+                variant_results.append(
+                    (
+                        sortable_variant,
+                        {
+                            "title": variant,
+                            "brain": brain,
+                            "letter": sortable_variant[0],
+                        },
+                    )
+                )
         variant_results = sorted(variant_results, key=lambda r: r[0])
         return tuple([r[1] for r in variant_results])
 
     def group_results_by_letter(self, results):
-        grouped_results = itertools.groupby(results,
-                                            lambda r: r['letter'])
-        results = [{'letter': key, 'results': list(values)}
-                   for (key, values)
-                   in grouped_results]
+        grouped_results = itertools.groupby(results, lambda r: r["letter"])
+        results = [
+            {"letter": key, "results": list(values)}
+            for (key, values) in grouped_results
+        ]
         return results
 
     def truncateDescription(self, text):
         """Truncate definition using tool properties"""
 
         max_length = api.portal.get_registry_record(
-            name="description_length", interface=IGlossarySettings,
+            name="description_length",
+            interface=IGlossarySettings,
         )
         ellipsis = api.portal.get_registry_record(
-            name="description_limiter", interface=IGlossarySettings,
+            name="description_limiter",
+            interface=IGlossarySettings,
         )
 
         text = safe_unicode(text).strip()
@@ -216,12 +224,12 @@ class GlossaryView(BrowserView):
     def result_features(self, result):
         """TAL friendly properties of each feature"""
 
-        description = self.truncateDescription(result['brain'].Description)
+        description = self.truncateDescription(result["brain"].Description)
         return {
-            "url": result['brain'].getURL(),
-            "title": result['title'] or result['brain'].getId,
+            "url": result["brain"].getURL(),
+            "title": result["title"] or result["brain"].getId,
             "description": description.replace("\n", "<br />"),
-            "letter": result['letter'],
+            "letter": result["letter"],
         }
 
 
