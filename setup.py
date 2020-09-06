@@ -4,11 +4,7 @@ from setuptools import setup
 
 version = "1.0.2.dev0"
 description = "Plone add-on product to define a glossary."
-long_description = (
-    open("README.rst").read()
-    + "\n\n"
-    + open("CHANGES.rst").read()
-)
+long_description = open("README.rst").read() + "\n\n" + open("CHANGES.rst").read()
 
 setup(
     name="kitconcept.glossary",
@@ -29,6 +25,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords="plone glossary",
