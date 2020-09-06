@@ -22,7 +22,7 @@
 
   <!-- enabled behaviors -->
   <property name="behaviors" purge="False">
-    <element value="plone.app.content.interfaces.INameFromTitle" />
+    <element value="plone.namefromtitle" />
   </property>
 
   <!-- View information -->
