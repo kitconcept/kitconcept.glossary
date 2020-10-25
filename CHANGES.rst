@@ -5,7 +5,8 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make the '@glossary_terms' restapi endpoint context-sensitive and available only to 'IGlossary' containers
+  [tiberiuichim]
 
 
 1.0.1 (2020-07-15)
