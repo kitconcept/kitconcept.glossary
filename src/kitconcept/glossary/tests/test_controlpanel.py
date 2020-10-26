@@ -38,8 +38,7 @@ class ControlPanelTestCase(unittest.TestCase):
         self.controlpanel = self.portal["portal_controlpanel"]
 
     def test_controlpanel_has_view(self):
-        view = api.content.get_view(
-            u"glossary-settings", self.portal, self.request)
+        view = api.content.get_view(u"glossary-settings", self.portal, self.request)
         self.assertTrue(view())
 
     def test_controlpanel_view_is_protected(self):
@@ -50,8 +49,7 @@ class ControlPanelTestCase(unittest.TestCase):
             self.portal.restrictedTraverse("@@glossary-settings")
 
     def test_controlpanel_installed(self):
-        actions = [a.getAction(self)["id"]
-                   for a in self.controlpanel.listActions()]
+        actions = [a.getAction(self)["id"] for a in self.controlpanel.listActions()]
         self.assertIn("glossary", actions)
 
     # def test_controlpanel_removed_on_uninstall(self):
@@ -87,12 +85,12 @@ class RegistryTestCase(unittest.TestCase):
 
     def test_records_removed_on_uninstall(self):
         if get_installer:
-            self.installer = get_installer(self.portal, self.layer['request'])
+            self.installer = get_installer(self.portal, self.layer["request"])
         else:
-            self.installer = api.portal.get_tool('portal_quickinstaller')
+            self.installer = api.portal.get_tool("portal_quickinstaller")
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer.uninstallProducts(['kitconcept.glossary'])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        self.installer.uninstallProducts(["kitconcept.glossary"])
 
         records = [
             IGlossarySettings.__identifier__ + ".enable_tooltip",
