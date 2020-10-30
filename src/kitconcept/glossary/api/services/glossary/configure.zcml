@@ -6,7 +6,7 @@
   <plone:service
     method="GET"
     name="@glossary_terms"
-    for="Products.CMFCore.interfaces.ISiteRoot"
+    for="kitconcept.glossary.interfaces.IGlossary"
     factory=".get.GetGlossaryTerms"
     permission="zope.Public"
     />

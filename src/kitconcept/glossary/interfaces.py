@@ -20,7 +20,9 @@ class IGlossarySettings(Interface):
     """Schema for the control panel form."""
 
     enable_tooltip = schema.Bool(
-        title=_(u"Enable tooltip?"), description=_(u"Enable tooltip."), default=True,
+        title=_(u"Enable tooltip?"),
+        description=_(u"Enable tooltip."),
+        default=True,
     )
 
     enabled_content_types = schema.List(
@@ -35,11 +37,15 @@ class IGlossarySettings(Interface):
     )
 
     description_length = schema.Int(
-        title=_(u"Description length"), required=True, default=100,
+        title=_(u"Description length"),
+        required=True,
+        default=100,
     )
 
     description_limiter = schema.TextLine(
-        title=_(u"Description ellipsis"), required=True, default=u"…",
+        title=_(u"Description ellipsis"),
+        required=True,
+        default=u"…",
     )
 
 
@@ -47,12 +53,18 @@ class IGlossary(Interface):
 
     """Container for GlossaryTerms."""
 
-    text = RichText(title=_(u"Body text"), required=False,)
+    text = RichText(
+        title=_(u"Body text"),
+        required=False,
+    )
 
 
 class IGlossaryTerm(Interface):
 
-    title = schema.TextLine(title=_(u"Glossary Term"), required=True,)
+    title = schema.TextLine(
+        title=_(u"Glossary Term"),
+        required=True,
+    )
 
     form.widget("variants", cols=25, rows=10)
     variants = schema.Tuple(
@@ -64,7 +76,9 @@ class IGlossaryTerm(Interface):
     )
 
     definition = RichText(
-        title=_(u"Body text"), description=_(u"Enter the body text."), required=False,
+        title=_(u"Body text"),
+        description=_(u"Enter the body text."),
+        required=False,
     )
 
     model.fieldset("settings", label=_(u"Settings"), fields=["exclude_from_nav"])

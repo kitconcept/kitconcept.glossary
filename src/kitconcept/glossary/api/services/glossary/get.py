@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from kitconcept.glossary.interfaces import IGlossarySettings
 from plone import api
-
 from plone.restapi.services import Service
 
-from kitconcept.glossary.interfaces import IGlossarySettings
 
 SERVICE_NAME = "@glossary_terms"
 
@@ -15,7 +14,7 @@ class GetGlossaryTerms(Service):
         return {"error": {"type": type, "message": message}}
 
     def reply(self):
-        brains = api.content.find(portal_type="GlossaryTerm")
+        brains = api.content.find(context=self.context, portal_type="GlossaryTerm")
 
         terms = [
             {
@@ -29,10 +28,14 @@ class GetGlossaryTerms(Service):
         ]
         settings = {
             "enabled": api.portal.get_registry_record(
-                name="enable_tooltip", interface=IGlossarySettings, default=False,
+                name="enable_tooltip",
+                interface=IGlossarySettings,
+                default=False,
             ),
             "enabled_types": api.portal.get_registry_record(
-                name="enabled_content_types", interface=IGlossarySettings, default=[],
+                name="enabled_content_types",
+                interface=IGlossarySettings,
+                default=[],
             ),
         }
 

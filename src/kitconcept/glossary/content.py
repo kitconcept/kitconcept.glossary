@@ -23,5 +23,5 @@ class GlossaryTerm(Item):
         tree = lxml.html.fromstring(u"<div>%s</div>" % self.definition.output)
         text = tree.text_content()
         # Remove lxml ElementUnicodeResult which is a subclass of unicode
-        text = safe_unicode(text.encode('utf-8'))
+        text = safe_unicode(text.encode("utf-8"))
         return text
