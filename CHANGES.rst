@@ -5,7 +5,8 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use behavior names to avoid nasty interface lookup problems.
+  [tisto]
 
 
 1.1.0 (2020-10-30)
